@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/static/css/main.abe9709b.chunk.css",
+    "main.js": "/static/js/main.916fdd7a.chunk.js",
+    "main.js.map": "/static/js/main.916fdd7a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.5f1c46cc.js",
+    "runtime-main.js.map": "/static/js/runtime-main.5f1c46cc.js.map",
+    "static/js/2.766ff207.chunk.js": "/static/js/2.766ff207.chunk.js",
+    "static/js/2.766ff207.chunk.js.map": "/static/js/2.766ff207.chunk.js.map",
+    "static/js/3.2d308582.chunk.js": "/static/js/3.2d308582.chunk.js",
+    "static/js/3.2d308582.chunk.js.map": "/static/js/3.2d308582.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.abe9709b.chunk.css.map": "/static/css/main.abe9709b.chunk.css.map",
+    "static/js/2.766ff207.chunk.js.LICENSE.txt": "/static/js/2.766ff207.chunk.js.LICENSE.txt",
+    "static/media/agronomy.34537478.svg": "/static/media/agronomy.34537478.svg",
+    "static/media/bloghead.57657620.jpg": "/static/media/bloghead.57657620.jpg",
+    "static/media/cashew.6ab7c568.jpg": "/static/media/cashew.6ab7c568.jpg",
+    "static/media/cashew.8e5cc8b6.jpg": "/static/media/cashew.8e5cc8b6.jpg",
+    "static/media/cowStrip.6b655b63.jpg": "/static/media/cowStrip.6b655b63.jpg",
+    "static/media/cows.71e2e521.jpg": "/static/media/cows.71e2e521.jpg",
+    "static/media/greenhouse.3272b727.jpeg": "/static/media/greenhouse.3272b727.jpeg",
+    "static/media/growth.ae6cc5fe.svg": "/static/media/growth.ae6cc5fe.svg",
+    "static/media/header.39405822.jpg": "/static/media/header.39405822.jpg",
+    "static/media/herd.6b655b63.jpg": "/static/media/herd.6b655b63.jpg",
+    "static/media/holdleaf.9fea18bd.jpg": "/static/media/holdleaf.9fea18bd.jpg",
+    "static/media/manager.c4c813ff.jpg": "/static/media/manager.c4c813ff.jpg",
+    "static/media/nuts.dc2fe8b0.jpg": "/static/media/nuts.dc2fe8b0.jpg",
+    "static/media/potatoStrip.98f2dc20.jpg": "/static/media/potatoStrip.98f2dc20.jpg",
+    "static/media/ricefarm.1c2192a1.jpg": "/static/media/ricefarm.1c2192a1.jpg",
+    "static/media/y-leaf.7144888c.png": "/static/media/y-leaf.7144888c.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5f1c46cc.js",
+    "static/js/2.766ff207.chunk.js",
+    "static/css/main.abe9709b.chunk.css",
+    "static/js/main.916fdd7a.chunk.js"
+  ]
+}
