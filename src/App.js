@@ -1,40 +1,30 @@
 import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import { ChakraProvider } from '@chakra-ui/react';
+import Layout from './components/Layout';
+import './styles/main.css';
+import { Route, Switch } from 'react-router-dom';
+import CreateNewBlogPost from './pages/CreateNewBlogPost';
+import theme from './helpers/theme';
+import GeneralContext from './context/GeneralContext';
+import ListPosts from './pages/ListPosts';
+import EditPost from './pages/EditPost';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+TimeAgo.addDefaultLocale(en);
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
+      <GeneralContext>
+        <Layout>
+          <Switch>
+            <Route exact path="/add_blog_post" component={CreateNewBlogPost} />
+            <Route exact path="/" component={ListPosts} />
+            {/* <Route exact path='/posts' component={ListPosts}/> */}
+            <Route path="/posts/edit/:uuid" component={EditPost} />
+          </Switch>
+        </Layout>
+      </GeneralContext>
     </ChakraProvider>
   );
 }
