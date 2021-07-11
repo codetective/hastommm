@@ -8,9 +8,8 @@ import theme from './helpers/theme';
 import GeneralContext from './context/GeneralContext';
 import ListPosts from './pages/ListPosts';
 import EditPost from './pages/EditPost';
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en';
-TimeAgo.addDefaultLocale(en);
+import Overview from './pages/Overview';
+import NotFoundPage from './pages/404Page';
 
 function App() {
   return (
@@ -18,10 +17,11 @@ function App() {
       <GeneralContext>
         <Layout>
           <Switch>
+            <Route exact path="/" component={Overview} />
+            <Route exact path="/posts" component={ListPosts} />
             <Route exact path="/add_blog_post" component={CreateNewBlogPost} />
-            <Route exact path="/" component={ListPosts} />
-            {/* <Route exact path='/posts' component={ListPosts}/> */}
             <Route path="/posts/edit/:uuid" component={EditPost} />
+            <Route path="*" component={NotFoundPage} />
           </Switch>
         </Layout>
       </GeneralContext>

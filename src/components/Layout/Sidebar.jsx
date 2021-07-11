@@ -13,25 +13,44 @@ import {
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../Global/Logo';
-import { FaHome, FaListAlt, FaEdit } from 'react-icons/fa';
+import { FaListAlt, FaEdit } from 'react-icons/fa';
+import { MdDashboard } from 'react-icons/md';
+import { FaUserFriends } from 'react-icons/fa';
+import { SiGooglemessages } from 'react-icons/si';
+import { GiGroundSprout } from 'react-icons/gi';
 const links = [
   {
     path: '/',
-    link: 'Articles',
-    icon: <FaListAlt />,
+    link: 'Dashboard',
+    icon: <MdDashboard />,
   },
 
+  {
+    path: '/posts',
+    link: 'List Posts',
+    icon: <FaListAlt />,
+  },
   {
     path: '/add_blog_post',
     link: 'Create Blog Post',
     icon: <FaEdit />,
   },
+  {
+    path: '/users',
+    link: 'Users',
+    icon: <FaUserFriends />,
+  },
+  {
+    path: '/subscriptions',
+    link: 'Subscriptions',
+    icon: <GiGroundSprout />,
+  },
+  {
+    path: '/messages',
+    link: 'Messages',
+    icon: <SiGooglemessages />,
+  },
 ];
-// {
-//   path: '/posts',
-//   link: 'List Posts',
-//   icon: <FaListAlt />,
-// },
 
 const SidebarContent = ({ onClick }) => (
   <Box>
