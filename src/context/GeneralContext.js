@@ -11,6 +11,7 @@ export function useGenCtx() {
 const GeneralProvider = ({ children }) => {
   const [fetchError, setError] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [categoriesData, setCategoriesData] = useState([]);
   const [loadingCategories, setLoading] = useState(false);
 
   //creating category vars
@@ -31,6 +32,8 @@ const GeneralProvider = ({ children }) => {
       const { data } = dt.data;
       setError(null);
       setCategories(data);
+      setCategoriesData(dt.data);
+
       setLoading(false);
     } catch (error) {
       setError(error.message);
@@ -60,9 +63,8 @@ const GeneralProvider = ({ children }) => {
       const dt = await axios.post(baseURL + '/article-category/create', {
         category: name,
       });
-      const { category } = dt.data;
       setCatError(null);
-      setCategories(prev => [...prev, category]);
+      FetchCategories();
       setCreatingCat(false);
     } catch (error) {
       setCatError(error.message);
@@ -81,6 +83,7 @@ const GeneralProvider = ({ children }) => {
         categories,
         fetchError,
         FetchCategories,
+        categoriesData,
 
         CreateCategory,
         creatingCat,

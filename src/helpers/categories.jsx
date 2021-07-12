@@ -1,5 +1,5 @@
-const categories = {
+const category = {
   blog: 'Blog Posts',
 };
 
-export default categories;
+export default category;

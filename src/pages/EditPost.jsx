@@ -137,7 +137,6 @@ export default function EditPost() {
           upload={upload}
         />
       </SimpleGrid>
-      {JSON.stringify(postBody)}
     </Box>
   );
 }

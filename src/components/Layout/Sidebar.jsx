@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../Global/Logo';
-import { FaListAlt, FaEdit } from 'react-icons/fa';
+import { FaListAlt, FaEdit, FaFolderPlus } from 'react-icons/fa';
 import { MdDashboard } from 'react-icons/md';
 import { FaUserFriends } from 'react-icons/fa';
 import { SiGooglemessages } from 'react-icons/si';
@@ -34,6 +34,11 @@ const links = [
     path: '/add_blog_post',
     link: 'Create Blog Post',
     icon: <FaEdit />,
+  },
+  {
+    path: '/categories',
+    link: 'Blog Categories',
+    icon: <FaFolderPlus />,
   },
   {
     path: '/users',

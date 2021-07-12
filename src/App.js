@@ -10,6 +10,7 @@ import ListPosts from './pages/ListPosts';
 import EditPost from './pages/EditPost';
 import Overview from './pages/Overview';
 import NotFoundPage from './pages/404Page';
+import Categories from './pages/Categories';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Overview} />
             <Route exact path="/posts" component={ListPosts} />
+            <Route exact path="/categories" component={Categories} />
             <Route exact path="/add_blog_post" component={CreateNewBlogPost} />
             <Route path="/posts/edit/:uuid" component={EditPost} />
             <Route path="*" component={NotFoundPage} />

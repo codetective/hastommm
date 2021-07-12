@@ -1,4 +1,3 @@
-const baseURL = 'http://167.172.247.71/api'
+const baseURL = 'https://farmlandnigeria.com/api';
 
-
-export default baseURL
+export default baseURL;

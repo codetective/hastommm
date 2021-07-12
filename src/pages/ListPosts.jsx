@@ -46,11 +46,11 @@ function ListPosts(props) {
           <Spinner
             thickness="4px"
             speed="0.25s"
-            emptyColor="gray.200"
+            emptyColor="secondary.100"
             color="green.500"
-            size="200px"
-            width="150px"
-            h="150px"
+            size="lg"
+            width="60px"
+            h="60px"
           />
         </Center>
       )}
