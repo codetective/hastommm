@@ -20,9 +20,9 @@ function ListPosts(props) {
   } = useGenCtx();
 
   useEffect(() => {
-    if (articles.length === 0) {
-      FetchArticles();
-    }
+    FetchArticles(
+      articlesData && articlesData.meta ? articlesData.meta.current_page : 1
+    );
     //eslint-disable-next-line
   }, []);
 
@@ -57,6 +57,7 @@ function ListPosts(props) {
       {!loadingArticles && errorArticles && (
         <ErrorAlert
           message="A network error may have caused this error, please"
+          errorObject={errorArticles}
           title="Something went wrong"
           retryFunc={FetchArticles}
         />

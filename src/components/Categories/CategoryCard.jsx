@@ -36,7 +36,6 @@ function CategoryCard({ category, setCategory }) {
   return (
     <HStack p="5" justify="space-between" bg="white" rounded="lg" shadow="md">
       <HStack>
-        {/* <Text>{category.category}</Text> */}
         <Editable
           defaultValue={category.category}
           onSubmit={value => {
@@ -61,11 +60,6 @@ function CategoryCard({ category, setCategory }) {
       </HStack>
 
       <HStack>
-        {/* <Circle bg="gray.50" size="35px" shadow="sm">
-          <Text color="secondary.100" fontWeight="semibold" fontSize="1.3rem">
-            {category.articlesCount}
-          </Text>
-        </Circle> */}
         <Text color="secondary.100" fontWeight="semibold" fontSize="1.1rem">
           {category.articlesCount}
         </Text>
@@ -74,7 +68,7 @@ function CategoryCard({ category, setCategory }) {
         </Text>
         <IconButton
           size="sm"
-          bg="red.100"
+          bg="red.500"
           colorScheme="red"
           onClick={() => {
             setCategory(category);

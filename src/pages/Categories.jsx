@@ -26,6 +26,7 @@ import Pagination from 'react-js-pagination';
 import { useState } from 'react';
 import baseURL from '../helpers/config';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 export default function Categories() {
   const toast = useToast();
@@ -68,6 +69,15 @@ export default function Categories() {
       });
     }
   };
+  useEffect(() => {
+    FetchCategories(
+      categoriesData && categoriesData.meta
+        ? categoriesData.meta.current_page
+        : 1
+    );
+    //eslint-disable-next-line
+  }, []);
+
   return (
     <Box pb="50px">
       <PageTitle category={category.blog} title="Categories" setCat={setCat} />
@@ -115,7 +125,8 @@ export default function Categories() {
       )}
       {!loadingCategories && fetchError && (
         <ErrorAlert
-          message="A network error occurred while fetching data"
+          errorObject={fetchError}
+          message="A network error may have occurred while fetching data"
           title="Oops! Something went wrong"
           retryFunc={FetchCategories}
         />

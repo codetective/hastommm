@@ -5,9 +5,16 @@ import {
   AlertIcon,
   AlertTitle,
   Button,
+  Text,
 } from '@chakra-ui/react';
 
-export default function ErrorAlert({ type, title, message, retryFunc }) {
+export default function ErrorAlert({
+  type,
+  title,
+  errorObject,
+  message,
+  retryFunc,
+}) {
   return (
     <Alert
       status={type || 'error'}
@@ -28,6 +35,10 @@ export default function ErrorAlert({ type, title, message, retryFunc }) {
         <Button onClick={retryFunc} colorScheme="green" variant="outline">
           RETRY
         </Button>
+        <br />
+        <Text as="small" fontStyle="italic">
+          {JSON.stringify(errorObject)}
+        </Text>
       </AlertDescription>
     </Alert>
   );

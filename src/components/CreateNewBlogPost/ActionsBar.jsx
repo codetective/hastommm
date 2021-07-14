@@ -15,6 +15,7 @@ import React from 'react';
 import { useState } from 'react';
 import { FcKindle, FcOpenedFolder, FcPicture } from 'react-icons/fc';
 import { MdCancel, MdCheckCircle, MdTitle } from 'react-icons/md';
+import { useGenCtx } from '../../context/GeneralContext';
 import { publishPost, updatePost } from '../../helpers/posts';
 
 export default function ActionsBar({
@@ -28,6 +29,7 @@ export default function ActionsBar({
 }) {
   const [publishing, setPublishing] = useState(false);
   const toast = useToast();
+  const { FetchCategories } = useGenCtx();
 
   function toastify(t, d) {
     return toast({
@@ -79,6 +81,7 @@ export default function ActionsBar({
       if (action === 'PUBLISH') {
         setInputsEmpty();
       }
+      FetchCategories();
       return toast({
         title: 'Article Published.',
         status: 'success',
