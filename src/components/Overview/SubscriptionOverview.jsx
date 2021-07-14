@@ -5,6 +5,7 @@ import { Pie } from 'react-chartjs-2';
 import { useEffect } from 'react';
 
 function SubscriptionOverview(props) {
+  //eslint-disable-next-line
   const [subs, setSubs] = useState({ cancelled: 45, expired: 80, active: 125 });
   const [loading, setLoading] = useState([]);
   const [chartData, setChartData] = useState(null);
@@ -43,6 +44,7 @@ function SubscriptionOverview(props) {
 
   useEffect(() => {
     serializeChartData();
+    //eslint-disable-next-line
   }, []);
   return (
     <SlideFade

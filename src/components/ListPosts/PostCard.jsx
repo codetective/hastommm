@@ -45,6 +45,7 @@ function PostCard({ post }) {
   const deletePost = async () => {
     setDeleting(true);
     try {
+      //eslint-disable-next-line
       let dt = await axios.delete(baseURL + '/article/' + post.uuid);
       setDeleted(true);
       onClose();

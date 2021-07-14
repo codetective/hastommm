@@ -79,6 +79,7 @@ const Header = ({ showSidebarButton = true, onShowSidebar }) => {
           boxShadow="md"
           transition="all .4s ease"
           transform={show ? 'translateX(150%)' : 'translateX(0)'}
+          display={show ? 'none' : 'flex'}
         >
           <Box
             w="full"

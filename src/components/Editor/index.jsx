@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -64,6 +64,7 @@ function EditorContainer({
     } else {
       setEditorState(EditorState.createEmpty());
     }
+    //eslint-disable-next-line
   }, []);
   return (
     <Editor

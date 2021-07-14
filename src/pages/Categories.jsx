@@ -51,6 +51,7 @@ export default function Categories() {
   const deleteCategory = async () => {
     setDeleting(true);
     try {
+      //eslint-disable-next-line
       let dt = await axios.delete(baseURL + '/article-category/' + cat.uuid);
       setDeleting(false);
       onClose();

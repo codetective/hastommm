@@ -60,6 +60,7 @@ const GeneralProvider = ({ children }) => {
     setCreatingCat(true);
     setCatError(null);
     try {
+      //eslint-disable-next-line
       const dt = await axios.post(baseURL + '/article-category/create', {
         category: name,
       });

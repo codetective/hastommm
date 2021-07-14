@@ -16,6 +16,7 @@ function CategoryCard({ category, setCategory }) {
   const editCategory = async value => {
     setEditing(true);
     try {
+      //eslint-disable-next-line
       let dt = await axios.put(baseURL + '/article-category/' + category.uuid, {
         category: value,
       });
