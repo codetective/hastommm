@@ -14,6 +14,7 @@ import {
 import { NavLink } from 'react-router-dom';
 import Logo from '../Global/Logo';
 import { FaListAlt, FaEdit, FaFolderPlus } from 'react-icons/fa';
+import { GiFlowerPot } from 'react-icons/gi';
 import { MdDashboard } from 'react-icons/md';
 import { FaUserFriends } from 'react-icons/fa';
 import { SiGooglemessages } from 'react-icons/si';
@@ -44,6 +45,11 @@ const links = [
     path: '/users',
     link: 'Users',
     icon: <FaUserFriends />,
+  },
+  {
+    path: '/farms',
+    link: 'Farms',
+    icon: <GiFlowerPot />,
   },
   {
     path: '/subscriptions',
