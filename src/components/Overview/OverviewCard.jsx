@@ -14,8 +14,8 @@ export default function OverviewCard({ title, stat, icon, pageLink }) {
         as={Link}
         to={pageLink}
         bg="white"
-        rounded="lg"
-        shadow="md"
+        shadow="sm"
+        borderRadius="2"
         px={[5, 4, 3, 4]}
         py="6"
         w="100%"

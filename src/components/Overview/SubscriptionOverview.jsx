@@ -39,7 +39,7 @@ function SubscriptionOverview(props) {
     });
     setTimeout(() => {
       setLoading(false);
-    }, 2500);
+    }, 2100);
   };
 
   useEffect(() => {

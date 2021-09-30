@@ -65,7 +65,7 @@ p {
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 0;
-  line-height: 1.8;
+  line-height: 1.5;
 }
 ul {
   margin: 0;
@@ -171,3 +171,4 @@ div.public-DraftEditor-content {
 .pagination-item:last-child {
   color: #f8a22f;
 }
+

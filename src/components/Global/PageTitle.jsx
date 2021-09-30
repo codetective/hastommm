@@ -4,7 +4,7 @@ import { Heading, Stack, Text } from '@chakra-ui/react';
 export default function PageTitle({ category, title }) {
   return (
     <Stack
-      w="100%"
+      w="auto"
       alignItems="flex-start"
       flexDir="column"
       justifyContent="center"

@@ -16,25 +16,28 @@ export default function Layout ({ children }) {
 
 	return (
 		<>
-				<BrowserRouter>
-			<Sidebar
-				variant={variants?.navigation}
-				isOpen={isSidebarOpen}
-				onClose={toggleSidebar}
-			/>
-			<Box ml={!variants?.navigationButton && '200px'}>
-				<Header
-					showSidebarButton={variants?.navigationButton}
-					onShowSidebar={toggleSidebar}
+			<BrowserRouter>
+				<Sidebar
+					variant={variants?.navigation}
+					isOpen={isSidebarOpen}
+					onClose={toggleSidebar}
 				/>
-				<Container maxW='container.xl' pt='8'>
-					<Box px='4'>
+				<Box ml={!variants?.navigationButton && '250px'}>
+					<Container maxW='container.xl' px={[1, 12]}  bg="#fefefe">
+						<Header
+							showSidebarButton={variants?.navigationButton}
+							onShowSidebar={toggleSidebar}
+						/>
+					</Container>
 
-					{children}
-					</Box>
-				</Container>
-			</Box>
-					</BrowserRouter>
+					<Container maxW='container.xl' pt='5'>
+						<Box px={[1, 12]}>
+
+							{children}
+						</Box>
+					</Container>
+				</Box>
+			</BrowserRouter>
 		</>
 	)
 }

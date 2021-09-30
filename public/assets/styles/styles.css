@@ -10,10 +10,12 @@
     p {
         font-family: 'Poppins', sans-serif !important;
     }
-    
+    .pointer{
+        cursor: pointer;
+    }
     .farm-header h2 {
         font-size: 26px;
-        font-weight: bold;
+        font-weight:500;
         color: #222222;
     }
     
@@ -25,16 +27,17 @@
     .farm-cards .farm-card,
     .farm-image-card {
         background-color: #FFFFFF;
+        border-radius: 5px;
+        border:solid 1px #e2e8f0;
     }
     
     .farm-cards .farm-card {
         margin-top: 20px;
-        padding: 25px 25px;
+        padding: 15px 25px;
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
-        width: 400px;
-        margin-right: 25px;
+        justify-content:start;
+        width: auto;
     }
     
     .farm-cards .farm-image-card {
@@ -79,16 +82,18 @@
         background-color: transparent !important;
         border: 1px solid green;
     }
-    
+    .bd{
+        border: 1px solid red !important;
+    }
     .farm-cards .farm-card .component .component-header {
-        font-weight: bold;
+        font-weight: 600;
         color: rgba(172, 172, 172);
         font-size: 18 px;
     }
     
     .farm-cards .farm-card .component .component-qty {
         font-size: 20px;
-        font-weight: bold;
+        font-weight: 600;
         color: #222222;
         margin-top: 5px;
     }
@@ -104,7 +109,7 @@
     }
     
     .farm-tab-section {
-        margin-top: 40px;
+        margin-top: 20px;
     }
     
     .farm-tab-section nav a {
@@ -122,20 +127,20 @@
     }
     
     .mini-card {
-        height: 50px;
-        width: 70%;
         background-color: #FFFFFF;
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
-        padding: 10px 15px;
+        flex-wrap: wrap;
+        justify-content: start;
+        align-items: center;
+        padding: 15px 20px;
     }
+
     
     .mini-card .card-name {
         font-size: 13px;
         font-weight: bold;
         margin-right: 10px;
-        margin-top: 5px;
     }
     
     .btn-add-outline {
@@ -150,6 +155,10 @@
         background-color: green;
         color: #FFFFFF !important;
     }
+
+    .table-section{
+        overflow: auto;
+    }
     
     .table-section table {
         width: 100%;
@@ -157,7 +166,6 @@
     
     .table-section table thead {
         background-color: #FFFFFF;
-        height: 50px;
         margin-bottom: 30px;
         border: 1px solid rgba(172, 172, 172, .1);
     }
@@ -165,10 +173,48 @@
     .table-section table thead th {
         font-size: 14px;
     }
-    
+
     .table-section table tbody {
         background-color: #FFFFFF;
-        border-top: 20px solid rgba(245, 245, 247) !important;
-        border: 1px solid rgba(172, 172, 172, .1);
         padding: 10px 0px;
+    }
+    .tabx {
+        font-size: 13px;
+        border-collapse: separate;
+        border-spacing:0px 4px !important;
+    }
+    over-h{
+        overflow: hidden;
+    }
+
+    .tabx th,
+    .tabx tr td {
+        padding: 20px 10px 20px 10px;
+        vertical-align: middle;
+        border: 0.5px solid rgba(100,100,100,0.05) !important;
+        white-space: nowrap;
+    }
+
+    .tabx tr{
+        /* border: none !important;   */
+        background:#fff ;
+        box-shadow: 0px 1px 3px 0px rgb(54 74 99 / 5%);
+    }
+    .tabx tr:hover{
+        box-shadow: 0px 7px 4px 3px rgba(126, 187, 194, 0.01);
+        background: #FDFDFF !important;
+    }
+    .tabx tr th:first-child{
+        padding: 20px 5px 20px 10px !important;
+    }
+    .tabx .descr{
+        white-space:normal;
+    }
+    .bg-success2{
+        background: #339900 !important;
+        color: #FFFFFF;
+    }
+    .btn-cls,.btn-cls:focus,.btn-cls:hover{
+        outline:none !important;
+        box-shadow: none !important;
     }

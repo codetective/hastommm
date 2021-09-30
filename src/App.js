@@ -8,6 +8,8 @@ import theme from './helpers/theme';
 import GeneralContext from './context/GeneralContext';
 import ListPosts from './pages/ListPosts';
 import Farms from './pages/Farms';
+import Cycle from './pages/Cycle';
+import Type from './pages/Type';
 import EditPost from './pages/EditPost';
 import Overview from './pages/Overview';
 import NotFoundPage from './pages/404Page';
@@ -21,7 +23,9 @@ function App() {
           <Switch>
             <Route exact path="/" component={Overview} />
             <Route exact path="/posts" component={ListPosts} />
-            <Route exact path="/farms" component={Farms} />
+            <Route exact path="/items" component={Farms} />
+            <Route exact path="/item-type" component={Type} />
+            <Route exact path="/cycle" component={Cycle} />
             <Route exact path="/categories" component={Categories} />
             <Route exact path="/add_blog_post" component={CreateNewBlogPost} />
             <Route path="/posts/edit/:uuid" component={EditPost} />
