@@ -44,21 +44,21 @@ export default function Cycle() {
                         <form>
                             <div className="mb-4">
                                 <h3 className="mb-1" >Cycle Name</h3>
-                                <Input type="text" placeholder="Tag name e.g Rainy season" />
+                                <Input type="text" placeholder="Tag name e.g Rainy season" required />
                             </div>
                             <div className="d-flex flex-wrap">
                                 <div className="mb-3 col-lg-6 pe-2">
                                     <h3 className="mb-1" >Start Date</h3>
-                                    <Input type="date" />
+                                    <Input type="date" required />
                                 </div>
 
                                 <div className="mb-3 col-lg-6 pe-2">
                                     <h3 className="mb-1" >End Date</h3>
-                                    <Input type="date" />
+                                    <Input type="date" required />
                                 </div>
 
                             </div>
-                            <div className="btn-success px-3 btn">Done</div>
+                            <button type="submit" className="btn-success px-3 btn">Done</button>
 
 
                         </form>

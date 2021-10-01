@@ -1,0 +1,174 @@
+    html,
+    body,
+    div,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    span,
+    p {
+        font-family: 'Poppins', sans-serif !important;
+    }
+    
+    .farm-header h2 {
+        font-size: 26px;
+        font-weight: bold;
+        color: #222222;
+    }
+    
+    .farm-cards {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .farm-cards .farm-card,
+    .farm-image-card {
+        background-color: #FFFFFF;
+    }
+    
+    .farm-cards .farm-card {
+        margin-top: 20px;
+        padding: 25px 25px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 400px;
+        margin-right: 25px;
+    }
+    
+    .farm-cards .farm-image-card {
+        width: 270px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .farm-cards .farm-image-card img {
+        height: 100%;
+        margin-right: 10px;
+    }
+    
+    .farm-setup {
+        margin-top: 5px;
+        padding: 10px;
+        padding-right: 20px;
+    }
+    
+    .farm-setup .setup-header p {
+        font-weight: bold;
+        color: #222222;
+        font-size: 17px;
+    }
+    
+    .btn-setup {
+        padding: 5px 15px !important;
+        background-color: green !important;
+        border-radius: 15px !important;
+        -webkit-border-radius: 15px !important;
+        -moz-border-radius: 15px !important;
+        -ms-border-radius: 15px !important;
+        -o-border-radius: 15px !important;
+        color: #FFFFFF !important;
+        font-size: 14px !important;
+    }
+    
+    .btn-setup:hover {
+        color: green !important;
+        background-color: transparent !important;
+        border: 1px solid green;
+    }
+    
+    .farm-cards .farm-card .component .component-header {
+        font-weight: 500 ;
+        color: rgba(172, 172, 172);
+        font-size: 18 px;
+    }
+    
+    .farm-cards .farm-card .component .component-qty {
+        font-size: 20px;
+        font-weight: 500;
+        color: #222222;
+        margin-top: 5px;
+    }
+    
+    .farm-cards .farm-card .component .component-qty span {
+        color: rgba(172, 172, 172);
+    }
+    
+    .farm-cards .farm-card .divider-card {
+        background-color: rgba(172, 172, 172, .1);
+        height: 80%;
+        width: 2px;
+    }
+    
+    .farm-tab-section {
+        margin-top: 40px;
+    }
+    
+    .farm-tab-section nav a {
+        color: rgba(172, 172, 172);
+    }
+    
+    .farm-tab-section nav a.active {
+        background-color: transparent !important;
+        border: none !important;
+        border-bottom: 2px solid green !important;
+    }
+    
+    .farm-tab-section nav a:hover {
+        color: green !important;
+    }
+    
+    .mini-card {
+        height: 50px;
+        width: 70%;
+        background-color: #FFFFFF;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 10px 15px;
+    }
+    
+    .mini-card .card-name {
+        font-size: 13px;
+        font-weight: bold;
+        margin-right: 10px;
+        margin-top: 5px;
+    }
+    
+    .btn-add-outline {
+        margin-top: -5px !important;
+        border: 1px solid green !important;
+        color: green !important;
+        font-size: 12px !important;
+        margin-top: 0px !important;
+    }
+    
+    .btn-add-outline:hover {
+        background-color: green;
+        color: #FFFFFF !important;
+    }
+    
+    .table-section table {
+        width: 100%;
+    }
+    
+    .table-section table thead {
+        background-color: #FFFFFF;
+        height: 50px;
+        margin-bottom: 30px;
+        border: 1px solid rgba(172, 172, 172, .1);
+    }
+    
+    .table-section table thead th {
+        font-size: 14px;
+    }
+    
+    .table-section table tbody {
+        background-color: #FFFFFF;
+        border-top: 20px solid rgba(245, 245, 247) !important;
+        border: 1px solid rgba(172, 172, 172, .1);
+        padding: 10px 0px;
+    }

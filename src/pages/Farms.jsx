@@ -57,16 +57,16 @@ const Farms = () => {
                         <form>
                             <div className="mb-4">
                                 <h3 className="mb-1" >Title</h3>
-                                <Input type="text" placeholder="Farm name" />
+                                <Input type="text" placeholder="Farm name" required />
                             </div>
                             <div className="mb-3">
                                 <h3 className="mb-1" >Description</h3>
-                                <Input type="text" placeholder="Description" />
+                                <Input type="text" placeholder="Description" required />
                             </div>
                             <Divider my="35px" h="0.5px !important" opacity="0.2" />
                             <div className="mb-3">
                                 <h3 className="mb-1" >Farm Type</h3>
-                                <Select placeholder="Select">
+                                <Select placeholder="Select" required>
                                     <option value="option1">Cashew</option>
                                     <option value="option2">Cattle</option>
 
@@ -74,7 +74,7 @@ const Farms = () => {
                             </div>
                             <div className="mb-3">
                                 <h3 className="mb-1" >Cycle</h3>
-                                <Select placeholder="Select">
+                                <Select placeholder="Select" required>
                                     <option value="option1">Rainy Season 2021</option>
                                     <option value="option2">Dry Season 2021</option>
                                 </Select>
@@ -83,14 +83,15 @@ const Farms = () => {
                             <div className="d-flex">
                                 <div className="mb-3 pe-4 col-md-6">
                                     <h3 className="mb-1" >Total Units</h3>
-                                    <Input type="number" placeholder="Max Units available" />
+                                    <Input type="number" placeholder="Max Units available" required />
                                 </div>
                                 <div className="mb-3 col-md-6">
                                     <h3 className="mb-1" >Unit Price</h3>
-                                    <Input type="number" placeholder="Amount" />
+                                    <Input type="number" placeholder="Amount" required/>
                                 </div>
                             </div>
-                            <div className="btn-success px-3 w-100 mt-3 btn">Create Farm</div>
+
+                            <button type="submit" className="btn-success px-3 w-100 mt-3 btn">Create Farm</button>
 
 
 

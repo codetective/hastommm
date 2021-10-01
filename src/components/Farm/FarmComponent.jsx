@@ -1,4 +1,5 @@
 import {Form, Row, Col} from 'react-bootstrap';
+import {Select} from "@chakra-ui/react";
 
 const FarmComponent = () => {
 
@@ -13,10 +14,20 @@ const FarmComponent = () => {
                     <Form className="w-100 ">
                         <Row className="w-100">
                             <Col className="my-2 col-md-6 col-lg-3 col-12">
-                                <Form.Control size="sm" placeholder="Farm Type" />
+                                <select className="form-select form-select-sm" placeholder="Select">
+                                    <option selected>Select farm type</option>
+                                    <option value="option1">Rainy Season 2021</option>
+                                    <option value="option2">Dry Season 2021</option>
+                                </select>
                             </Col>
                             <Col  className="my-2 col-md-6 col-lg-3 col-12" >
-                                <Form.Control size="sm" placeholder="Cycle" />
+                                <input className="form-control form-control-sm" list="datalistOptions" id="exampleDataList"
+                                       placeholder="Cycle..."/>
+                                <datalist id="datalistOptions">
+                                    <option value="Rainy Season 2021"/>
+                                    <option value="Rainy Season 2022"/>
+
+                                </datalist>
                             </Col>
 
                             <Col className="my-2">

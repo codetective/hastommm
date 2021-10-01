@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react"
 import React from "react";
 
-const FarmComponent = () => {
+const TypeComponent = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
 
@@ -61,7 +61,7 @@ const FarmComponent = () => {
                                     <div className="mb-3 pt-4 col-lg-12">
                                         <h3 className="mb-1" >Detailed Description</h3>
                                         <textarea className="form-control" rows="3" placeholder="Max 200 chars">
-                                </textarea>
+                                        </textarea>
                                     </div>
                                 </div>
 
@@ -95,4 +95,4 @@ const FarmComponent = () => {
     )
 }
 
-export default FarmComponent
+export default TypeComponent

@@ -9,6 +9,8 @@ import GeneralContext from './context/GeneralContext';
 import ListPosts from './pages/ListPosts';
 import Farms from './pages/Farms';
 import Cycle from './pages/Cycle';
+import Report from './pages/Report';
+import User from './pages/User';
 import Type from './pages/Type';
 import EditPost from './pages/EditPost';
 import Overview from './pages/Overview';
@@ -26,6 +28,9 @@ function App() {
             <Route exact path="/items" component={Farms} />
             <Route exact path="/item-type" component={Type} />
             <Route exact path="/cycle" component={Cycle} />
+            <Route exact path="/reports" component={Report} />
+
+            <Route exact path="/users" component={User} />
             <Route exact path="/categories" component={Categories} />
             <Route exact path="/add_blog_post" component={CreateNewBlogPost} />
             <Route path="/posts/edit/:uuid" component={EditPost} />

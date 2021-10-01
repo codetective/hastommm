@@ -32,7 +32,6 @@ export default function Layout ({ children }) {
 
 					<Container maxW='container.xl' pt='5'>
 						<Box px={[1, 12]}>
-
 							{children}
 						</Box>
 					</Container>

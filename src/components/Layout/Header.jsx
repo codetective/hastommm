@@ -43,6 +43,9 @@ const Header = ({ showSidebarButton = true, onShowSidebar }) => {
         <div flex="1" h="40px">
           <Text fontWeight="600" fontSize="xl">
             {pathname === '/' && 'Admin Panel'}
+            {pathname === '/reports' && 'Manage Reports'}
+            {pathname === '/users' && 'Users'}
+            {pathname === '/subscriptions' && 'Subscriptions'}
             {pathname === '/cycle' && 'Farm Setup'}
             {pathname === '/items' && 'Farm Setup'}
             {pathname === '/item-type' && 'Farm Setup'}
