@@ -1,22 +1,29 @@
-import { useState } from 'react'
+import React from 'react'
 import { Box, Container, useBreakpointValue } from '@chakra-ui/react'
 
 import Header from './Header.jsx'
 import Sidebar from './Sidebar.jsx'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter} from 'react-router-dom'
+import store from '../../store/store'
+import { useState } from '@hookstate/core'
 
 const smVariant = { navigation: 'drawer', navigationButton: true }
 const mdVariant = { navigation: 'sidebar', navigationButton: false }
 
 export default function Layout ({ children }) {
-	const [isSidebarOpen, setSidebarOpen] = useState(false)
+	const [isSidebarOpen, setSidebarOpen] = React.useState(false)
 	const variants = useBreakpointValue({ base: smVariant, md: mdVariant })
 
 	const toggleSidebar = () => setSidebarOpen(!isSidebarOpen)
 
+	const {isAuth} = useState(store)
+
+	
 	return (
 		<>
 			<BrowserRouter>
+				{isAuth.get() ?
+				<>
 				<Sidebar
 					variant={variants?.navigation}
 					isOpen={isSidebarOpen}
@@ -36,6 +43,14 @@ export default function Layout ({ children }) {
 						</Box>
 					</Container>
 				</Box>
+				</>
+				:
+				<Container maxW='container.xl' pt='5'>
+					<Box px={[1, 12]}>
+						{children}
+					</Box>
+				</Container>
+				}
 			</BrowserRouter>
 		</>
 	)
