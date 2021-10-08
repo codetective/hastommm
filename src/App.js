@@ -39,17 +39,37 @@ function App() {
           </Alert>
           <Switch>
             <Route exact path="/" component={Auth} />
-            <ProtectedRoute path="/dashboard" component={Overview} />
-            <ProtectedRoute path="/posts" component={ListPosts} />
-            <ProtectedRoute path="/items" component={Farms} />
-            <ProtectedRoute path="/item-type" component={Type} />
-            <ProtectedRoute path="/cycle" component={Cycle} />
-            <ProtectedRoute path="/reports" component={Report} />
+            <ProtectedRoute path="/dashboard"> 
+              <Overview /> 
+            </ProtectedRoute>
+            <ProtectedRoute path="/posts">
+              <ListPosts />
+            </ProtectedRoute>
+            <ProtectedRoute path="/items">
+              <Farms />
+            </ProtectedRoute>
+            <ProtectedRoute path="/item-type">
+              <Type />
+            </ProtectedRoute>
+            <ProtectedRoute path="/cycle">
+              <Cycle />
+            </ProtectedRoute>
+            <ProtectedRoute path="/reports">
+              <Report/>
+            </ProtectedRoute>
 
-            <ProtectedRoute path="/users" component={User} />
-            <ProtectedRoute path="/categories" component={Categories} />
-            <ProtectedRoute path="/add_blog_post" component={CreateNewBlogPost} />
-            <ProtectedRoute path="/posts/edit/:uuid" component={EditPost} />
+            <ProtectedRoute path="/users">
+              <User />
+            </ProtectedRoute>
+            <ProtectedRoute path="/categories">
+              <Categories />
+            </ProtectedRoute>
+            <ProtectedRoute path="/add_blog_post">
+              <CreateNewBlogPost />
+            </ProtectedRoute>
+            <ProtectedRoute path="/posts/edit/:uuid">
+              <EditPost />
+            </ProtectedRoute>
             <Route path="*" component={NotFoundPage} />
           </Switch>
         </Layout>

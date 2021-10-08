@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import store from '../../store/store'
 import { useState } from '@hookstate/core';
 
-const ProtectedRoute = ({component, path}) => {
+const ProtectedRoute = ({children, path}) => {
     const {isAuth} = useState(store)
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const ProtectedRoute = ({component, path}) => {
     return (
         isAuth.get() ?
         <Route path={path} exact>
-            {component}
+            {children}
         </Route>
         :
         <Redirect

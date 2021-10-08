@@ -1,5 +1,5 @@
 import { Box, SimpleGrid, Stack } from '@chakra-ui/react';
-import React from 'react';
+import {useEffect, useState} from 'react';
 import PageTitle from '../components/Global/PageTitle';
 import { ImNewspaper } from 'react-icons/im';
 import { FaUserFriends,FaCalendarAlt } from 'react-icons/fa';
@@ -7,8 +7,20 @@ import { SiGooglemessages } from 'react-icons/si';
 import { GiGroundSprout } from 'react-icons/gi';
 import OverviewCard from '../components/Overview/OverviewCard';
 import SubscriptionOverview from '../components/Overview/SubscriptionOverview';
+import {getCycle} from '../apiServices/cycleServices';
 
-export default function Overview() {
+const Overview = () => {
+  const [totalCycles, setTotalCycles] = useState("")
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const fetch = async() => {
+      const res = await getCycle()
+      console.log(res)
+    }
+    fetch()
+  }, [])
+
   return (
     <Box pb="50px">
       <PageTitle category={'Overview'} title="Dashboard" />
@@ -49,3 +61,5 @@ export default function Overview() {
     </Box>
   );
 }
+
+export default Overview;

@@ -28,13 +28,12 @@ const Auth = () => {
     })
 
     useEffect(() => {
-		const token = localStorage.getItem("token")
-        console.log(token)
-		if(token){
-			isAuth.set(true)
-			history.push("/dashboard")
-		}
-	}, [])
+      const token = localStorage.getItem("token")
+      if(token){
+        isAuth.set(true)
+        history.push("/dashboard")
+      }
+	  }, [])
 
     const onSubmit = async(value) => {
         try{

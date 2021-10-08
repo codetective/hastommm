@@ -8,10 +8,6 @@ export const register = (data) => {
     return http.post("/create-account", data)
 }
 
-// export const forgotPassword = (data) => {
-//     return http.post("/forgot-password", data)
-// }
-
 export const logout = () => {
     return http.post("/sign-out")
 }
