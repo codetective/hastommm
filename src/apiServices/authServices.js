@@ -1,11 +1,11 @@
 import { http } from './httpService';
 
 export const login = (data) => {
-    return http.post("/signin", data)
+    return http.post("/super-admin/signin", data)
 }
 
-export const register = (data) => {
-    return http.post("/create-account", data)
+export const createAdmin = (data) => {
+    return http.post("/super-admin/create-admin", data)
 }
 
 export const logout = () => {

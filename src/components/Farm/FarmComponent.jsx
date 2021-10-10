@@ -1,8 +1,87 @@
 import {Form, Row, Col} from 'react-bootstrap';
+import {getCycle} from '../../apiServices/cycleServices';
+import {getFarmType} from '../../apiServices/farmTypeServices';
+import {deleteFarm} from '../../apiServices/farmServices';
+import React, {useEffect} from 'react';
+import store from '../../store/store';
+import { useState } from '@hookstate/core';
+
+
 // import {Select} from "@chakra-ui/react";
 
-const FarmComponent = ({data}) => {
+const FarmComponent = ({data, setContentChanged, contentChanged}) => {
+    const [cycles, setCycles] = React.useState([]);
+    const [farmTypes, setFarmTypes] = React.useState([])
 
+    const {alertNotification} = useState(store)
+    const {alertType} = useState(store)
+    const {alertMessage} = useState(store)
+
+    useEffect(() => {
+        const fetch = async() => {
+            try{
+                const res = await getCycle()
+                setCycles(res.data.data)
+            }
+            catch(err){
+                console.log(err)
+            }
+        } 
+        fetch()
+    }
+    ,[])
+
+    useEffect(() => {
+        const fetch = async() => {
+            try{
+                const res = await getFarmType()
+                setFarmTypes(res.data.data)
+            }
+            catch(err){
+                console.log(err)
+            }
+        } 
+        fetch()
+    }
+    ,[])
+
+    const onDelete = async(id) => {
+        try{
+            const res = await deleteFarm(id)
+            if(res.status === 200){
+              alertMessage.set("Farm Deleted")
+              alertType.set("success")
+              alertNotification.set(true)
+              setContentChanged(contentChanged + 1)
+              setTimeout(() => {
+                alertNotification.set(false)
+                alertMessage.set("")
+                alertType.set("")
+              }, 1000);
+            }
+            else{
+              alertMessage.set("Failed to Delete Farm")
+              alertType.set("danger")
+              alertNotification.set(true)
+              setTimeout(() => {
+                alertNotification.set(false)
+                alertMessage.set("")
+                alertType.set("")
+              }, 1000);
+            }
+          }
+          catch(err){
+            console.log(err)
+            alertMessage.set("An Error Occured")
+              alertType.set("danger")
+              alertNotification.set(true)
+              setTimeout(() => {
+                alertNotification.set(false)
+                alertMessage.set("")
+                alertType.set("")
+              }, 1000);
+          }
+    }
     return (
 
         <div classname="tab-component-wrapper">
@@ -16,17 +95,18 @@ const FarmComponent = ({data}) => {
                             <Col className="my-2 col-md-6 col-lg-3 col-12">
                                 <select className="form-select form-select-sm" placeholder="Select">
                                     <option selected>Select farm type</option>
-                                    <option value="option1">Rainy Season 2021</option>
-                                    <option value="option2">Dry Season 2021</option>
+                                    {farmTypes.map(data => (
+                                    <option value={data.id} key={data.id}>{data.name}</option>
+                                    ))}
                                 </select>
                             </Col>
                             <Col  className="my-2 col-md-6 col-lg-3 col-12" >
                                 <input className="form-control form-control-sm" list="datalistOptions" id="exampleDataList"
                                        placeholder="Cycle..."/>
                                 <datalist id="datalistOptions">
-                                    <option value="Rainy Season 2021"/>
-                                    <option value="Rainy Season 2022"/>
-
+                                    {cycles.map(data => (
+                                    <option value={data.label} key={data.id} />
+                                    ))}
                                 </datalist>
                             </Col>
 
@@ -59,10 +139,13 @@ const FarmComponent = ({data}) => {
                                 <td>{item.label}</td>
                                 <td className="descr">{item.description}</td>
                                 <td>{item.max}</td>
-                                <td className="text-success fw-bold">500,000</td>
+                                <td className="text-success fw-bold">{item.amount}</td>
                                 <td className="alert alert-primary">{item.type.name}</td>
                                 <td>{item.cycle.label}</td>
-                                <td><span className="btn btn-dark btn-sm">View</span> </td>
+                                <td>
+                                    <span className="btn btn-dark btn-sm mr-2">View</span>
+                                    <span className="btn btn-dark btn-sm" onClick={() => onDelete(item.id)}>Delete</span>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

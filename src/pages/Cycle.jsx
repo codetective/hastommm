@@ -100,7 +100,6 @@ export default function Cycle() {
               alertType.set("")
             }, 1000);
         }
-        // console.log(cookieData)
       }
 
     return (

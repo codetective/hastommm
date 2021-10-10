@@ -8,10 +8,12 @@ import { GiGroundSprout } from 'react-icons/gi';
 import OverviewCard from '../components/Overview/OverviewCard';
 import SubscriptionOverview from '../components/Overview/SubscriptionOverview';
 import {getCycle} from '../apiServices/cycleServices';
+import {getArticles} from '../apiServices/articleService';
 import ContentLoader from '../components/ContentLoader/ContentLoader';
 
 const Overview = () => {
   const [totalCycles, setTotalCycles] = useState(0)
+  const [totalArticles, setTotalArticles] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -21,6 +23,20 @@ const Overview = () => {
         const res = await getCycle()
         setTotalCycles(res.data.data.length)
         setIsLoading(false)
+      }
+      catch(err){
+        console.log(err)
+      }
+    }
+    fetch()
+  }, [])
+
+  useEffect(() => {
+    const fetch = async() => {
+      setIsLoading(true)
+      try{
+        const res = await getArticles()
+        setTotalArticles(res.data.meta.total)
       }
       catch(err){
         console.log(err)
@@ -59,7 +75,7 @@ const Overview = () => {
             pageLink="/posts"
             title="Blog posts"
             icon={ImNewspaper}
-            stat={159}
+            stat={totalArticles}
           />
 
         </SimpleGrid>
