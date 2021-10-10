@@ -8,20 +8,31 @@ import { GiGroundSprout } from 'react-icons/gi';
 import OverviewCard from '../components/Overview/OverviewCard';
 import SubscriptionOverview from '../components/Overview/SubscriptionOverview';
 import {getCycle} from '../apiServices/cycleServices';
+import ContentLoader from '../components/ContentLoader/ContentLoader';
 
 const Overview = () => {
-  const [totalCycles, setTotalCycles] = useState("")
+  const [totalCycles, setTotalCycles] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetch = async() => {
-      const res = await getCycle()
-      console.log(res)
+      setIsLoading(true)
+      try{
+        const res = await getCycle()
+        setTotalCycles(res.data.data.length)
+        setIsLoading(false)
+      }
+      catch(err){
+        console.log(err)
+      }
     }
     fetch()
   }, [])
 
   return (
+    isLoading ?
+    <ContentLoader />
+    :
     <Box pb="50px">
       <PageTitle category={'Overview'} title="Dashboard" />
       <Stack spacing="30px">
@@ -42,7 +53,7 @@ const Overview = () => {
               pageLink="/cycle"
               title="Cycles"
               icon={FaCalendarAlt}
-              stat={3}
+              stat={totalCycles}
           />
           <OverviewCard
             pageLink="/posts"
@@ -53,10 +64,10 @@ const Overview = () => {
 
         </SimpleGrid>
 
-        {/*<SimpleGrid columns={[1, 1, 1, 2]} spacing="40px">*/}
-        {/*  <SubscriptionOverview />*/}
-        {/*  <Box w="60%" py="10"></Box>*/}
-        {/*</SimpleGrid>*/}
+        {/* <SimpleGrid columns={[1, 1, 1, 2]} spacing="40px">
+         <SubscriptionOverview />
+         <Box w="60%" py="10"></Box>
+        </SimpleGrid> */}
       </Stack>
     </Box>
   );

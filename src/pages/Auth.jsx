@@ -65,7 +65,7 @@ const Auth = () => {
         catch(err){
           console.log(err)
           alertMessage.set("An Error Occured")
-            alertType.set("success")
+            alertType.set("danger")
             alertNotification.set(true)
             setTimeout(() => {
               alertNotification.set(false)
@@ -117,7 +117,7 @@ const Auth = () => {
                     <small className="text-danger"> {errors.password && touched.password && errors.password} </small>
                     <button type="submit">
                     {isSubmitting ?
-                    <Spinner animation="border"/>
+                    <Spinner animation="border"  size="sm"/>
                     :
                     "Log In"
                     }

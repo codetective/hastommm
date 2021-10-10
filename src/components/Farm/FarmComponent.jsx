@@ -1,7 +1,7 @@
 import {Form, Row, Col} from 'react-bootstrap';
-import {Select} from "@chakra-ui/react";
+// import {Select} from "@chakra-ui/react";
 
-const FarmComponent = () => {
+const FarmComponent = ({data}) => {
 
     return (
 
@@ -53,16 +53,18 @@ const FarmComponent = () => {
                         </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><b>01</b></td>
-                        <td>Cashew Revival Pack</td>
-                        <td className="descr">This is a cashew investment plan opened for new customers only plan opened for new customers only</td>
-                        <td>500</td>
-                        <td className="text-success fw-bold">500,000</td>
-                        <td className="alert alert-primary">Cashew</td>
-                        <td>Rainy Cycle 2021</td>
-                        <td><span className="btn btn-dark btn-sm">View</span> </td>
-                    </tr>
+                        {data.map((item, index) => (
+                            <tr key={item.id}>
+                                <td><b>{index + 1}</b></td>
+                                <td>{item.label}</td>
+                                <td className="descr">{item.description}</td>
+                                <td>{item.max}</td>
+                                <td className="text-success fw-bold">500,000</td>
+                                <td className="alert alert-primary">{item.type.name}</td>
+                                <td>{item.cycle.label}</td>
+                                <td><span className="btn btn-dark btn-sm">View</span> </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

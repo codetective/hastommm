@@ -12,11 +12,41 @@ import {
     Select,
     Divider,
     useDisclosure,
-} from "@chakra-ui/react"
+} from "@chakra-ui/react";
+import {getFarmType} from '../apiServices/farmTypeServices';
+import {getFarm, createFarm} from '../apiServices/farmServices';
+import React, {useEffect} from 'react';
+import ContentLoader from '../components/ContentLoader/ContentLoader';
+import {Formik} from 'formik';
+import * as Yup from 'yup';
+import store from '../store/store';
+import { useState } from '@hookstate/core';
+import {Spinner, Alert} from 'react-bootstrap';
 
 const Farms = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [farms, setFarms] = React.useState([])
+    const [isLoading, setIsLoading] = React.useState(true)
+
+    useEffect(() => {
+        const fetch = async() => {
+            try{
+                const res = await getFarm()
+                setFarms(res.data.data)
+                setIsLoading(false)
+                console.log(res)
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+        fetch()
+    },
+    [])
     return (
+        isLoading ?
+        <ContentLoader />
+        :
         <div className="farm-wrapper">
 
             <div className="d-flex flex-column">
@@ -27,7 +57,7 @@ const Farms = () => {
                     <div className="farm-card bg-success2">
                         <div className="component">
                             <div className="component-header text-white"> Total Farms </div>
-                            <div className="component-qty text-white">5</div>
+                            <div className="component-qty text-white">{farms.length}</div>
                         </div>
 
                     </div>
@@ -39,15 +69,11 @@ const Farms = () => {
             <div className="farm-tab-section">
                 <Tabs defaultActiveKey="farms" id="uncontrolled-tab-example" className="mb-3">
                     <Tab eventKey="farms" title="Farms">
-                        <FarmComponent />
+                        <FarmComponent data={farms}/>
                     </Tab>
-
                 </Tabs>
             </div>
-
-
-
-
+            
             <Modal  isOpen={isOpen} onClose={onClose} size={"xl"}>
                 <ModalOverlay />
                 <ModalContent className="mt-3">

@@ -1,15 +1,15 @@
 import { http } from './httpService';
 
-export const createCycle = () => {
-    return http.post("/cycle/create")
+export const createCycle = (data) => {
+    return http.post("/cycle/create", data)
 }
 
 export const getCycle = () => {
     return http.get("/cycle/all/list")
 }
 
-export const editCycle = (id) => {
-    return http.put(`/api/cycle/update/${id}`)
+export const editCycle = (id, data) => {
+    return http.put(`/cycle/update/${id}`, data)
 }
 
 export const deleteCycle = (id) => {

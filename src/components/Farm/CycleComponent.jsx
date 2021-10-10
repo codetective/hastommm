@@ -1,6 +1,6 @@
 import {Form, Row, Col} from 'react-bootstrap';
 
-const CycleComponent = () => {
+const CycleComponent = ({data}) => {
     return (
         <div classname="tab-component-wrapper">
 
@@ -48,13 +48,14 @@ const CycleComponent = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><b>01</b></td>
-                        <td>Rainy Season 2021</td>
-                        <td>3 October 2021</td>
-                        <td>3 December 2021</td>
-
-                    </tr>
+                        {data.map((item, index) => (
+                            <tr key={item.id}>
+                                <td><b>{index + 1}</b></td>
+                                <td>{item.label}</td>
+                                <td>{item.start_date}</td>
+                                <td>{item.end_date}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
