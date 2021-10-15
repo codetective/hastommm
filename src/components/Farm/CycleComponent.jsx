@@ -1,4 +1,6 @@
 import {Form, Row, Col} from 'react-bootstrap';
+import {FaTrashAlt} from "react-icons/fa";
+import React from "react";
 
 const CycleComponent = ({data}) => {
     return (
@@ -43,6 +45,7 @@ const CycleComponent = ({data}) => {
                         <th>Cycle Name</th>
                         <th>Start Date</th>
                         <th>End date</th>
+                        <th>Action</th>
 
 
                     </tr>
@@ -54,6 +57,12 @@ const CycleComponent = ({data}) => {
                                 <td>{item.label}</td>
                                 <td>{item.start_date}</td>
                                 <td>{item.end_date}</td>
+                                <td className="d-flex align-items-center">
+                                    <span className="text-decoration-underline pointer me-3">View</span>
+
+                                    <FaTrashAlt />
+
+                                </td>
                             </tr>
                         ))}
                     </tbody>

@@ -122,11 +122,11 @@ export default function Cycle() {
                 <div onClick={onOpen}  className="btn btn-success my-2 px-3">Create New Type</div>
             </div>
             <Divider mb="15px" h="0.5px !important" opacity="0.1" />
-            <div className="farm-wrapper farm-type-card-wrapper">
+            <div className="d-flex">
 
-                <div className="farm-tab-section mt-0">
+                <div className=" w-100 d-flex flex-wrap">
                     {farmTypes.map(data => (
-                        <TypeComponent key={data.id} data={data} setContentChanged={setContentChanged} contentChanged={contentChanged}/>      
+                        <TypeComponent key={data.id} data={data} setContentChanged={setContentChanged} contentChanged={contentChanged}/>
                     ))}
                 </div>
             </div>

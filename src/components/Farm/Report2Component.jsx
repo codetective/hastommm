@@ -1,4 +1,6 @@
 import {Form, Row, Col} from 'react-bootstrap';
+import {FaTrashAlt} from "react-icons/fa";
+import React from "react";
 
 const Report2Component = () => {
     return (
@@ -35,6 +37,7 @@ const Report2Component = () => {
                         <th>Activity</th>
                         <th>Pack Owner</th>
                         <th>Pack Issued</th>
+                        <th>Action</th>
 
 
 
@@ -47,6 +50,13 @@ const Report2Component = () => {
                         <td>Monthly weed clearing and applying of yeast fertilizer using our sprays and mixing c4 packages.</td>
                         <td>Felicia Thomas</td>
                         <td>Pack1234</td>
+                        <td className="d-flex align-items-center">
+                            <span className="text-decoration-underline pointer me-3">View</span>
+
+                            <FaTrashAlt />
+
+                        </td>
+
 
                     </tr>
                     </tbody>

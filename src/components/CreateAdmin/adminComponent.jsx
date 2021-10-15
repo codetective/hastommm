@@ -1,8 +1,6 @@
 import {Form, Row, Col} from 'react-bootstrap';
 import {FaTrashAlt} from "react-icons/fa";
-import React from "react";
-
-const ReportComponent = () => {
+const adminComponent = () => {
     return (
         <div classname="tab-component-wrapper">
 
@@ -15,19 +13,15 @@ const ReportComponent = () => {
                         <Row className="w-100">
                             <Col className="my-2 col-md-6 col-lg-3 col-12">
                                 <input className="form-control form-control-sm" list="datalistOptions" id="exampleDataList"
-                                       placeholder="Cycle..."/>
+                                       placeholder="Search by Email.."/>
                                     <datalist id="datalistOptions">
-                                        <option value="Rainy Season 2021"/>
-                                            <option value="Rainy Season 2022"/>
+                                        <option value="James"/>
+                                            <option value="Peace"/>
 
                                     </datalist>
                             </Col>
 
-                            <Col  className="my-2 col-md-6 col-lg-4 col-12">
-                                <Form.Control placeholder="Filter Date" id="date2" size="sm" type="text" onFocus={(e) => {
-                                    document.getElementById("date2").type='date';
-                                }}/>
-                            </Col>
+
                             <Col className="my-2">
                                 <button className="btn btn-add-outline">Apply</button>
                             </Col>
@@ -41,10 +35,12 @@ const ReportComponent = () => {
                 <table className="table tabx table-responsive over-h">
                     <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Report</th>
-                        <th>Activity</th>
-                        <th>Cycle Issued</th>
+                        <th>S/N</th>
+                        <th>Admin</th>
+                        <th>Email</th>
+                        <th>Phone number</th>
+                        <th>Location</th>
+                        <th>Password</th>
                         <th>Action</th>
 
 
@@ -52,17 +48,14 @@ const ReportComponent = () => {
                     </thead>
                     <tbody>
                     <tr>
-                        <td><b>15/20/2021</b></td>
-                        <td>Fertilizer pack</td>
-                        <td>Monthly weed clearing and applying of yeast fertilizer using our sprays and mixing c4 packages.</td>
-                        <td>Rainy Season 2021</td>
-
-                        <td className="d-flex align-items-center">
-                            <span className="text-decoration-underline pointer me-3">View</span>
-
-                            <FaTrashAlt />
-
-                        </td>
+                        <td><b>1</b></td>
+                        <td><b> James Demiji</b></td>
+                        <td><b> jamedi74@gmail.com</b></td>
+                        <td><b>0839374792</b></td>
+                        <td className="text-success"><b>14</b></td>
+                        <td className="text-danger"><b>2</b></td>
+                        <td className='d-flex align-items-center'>
+                            <span className="text-decoration-underline me-3 pointer">Deactivate Admin</span> </td>
 
                     </tr>
                     </tbody>
@@ -73,4 +66,4 @@ const ReportComponent = () => {
     )
 }
 
-export default ReportComponent
+export default adminComponent

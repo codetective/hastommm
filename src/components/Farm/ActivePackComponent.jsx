@@ -1,8 +1,9 @@
 import {Form, Row, Col} from 'react-bootstrap';
-import {FaTrashAlt} from "react-icons/fa";
+import {FaCheckCircle, FaTrashAlt} from "react-icons/fa";
 import React from "react";
 
-const ReportComponent = () => {
+
+const ActivePackComponent  = () => {
     return (
         <div classname="tab-component-wrapper">
 
@@ -36,32 +37,39 @@ const ReportComponent = () => {
                 </div>
             </div>
 
-
             <div className="table-section w-100">
                 <table className="table tabx table-responsive over-h">
                     <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Report</th>
-                        <th>Activity</th>
-                        <th>Cycle Issued</th>
-                        <th>Action</th>
 
+                        <th>Pack ID</th>
+                        <th>Date Ordered</th>
+                        <th>Ordered by</th>
+                        <th>Order Details</th>
+                        <th>QTY / Price</th>
+                        <th>Profit</th>
 
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
+                        <td>Pack ID</td>
                         <td><b>15/20/2021</b></td>
-                        <td>Fertilizer pack</td>
-                        <td>Monthly weed clearing and applying of yeast fertilizer using our sprays and mixing c4 packages.</td>
-                        <td>Rainy Season 2021</td>
 
-                        <td className="d-flex align-items-center">
-                            <span className="text-decoration-underline pointer me-3">View</span>
+                        <td>Omolola Daniel <br/> <b>email@gmail.com</b><br/> 08149423902</td>
+                        <td>
+                            <b>Farm: </b>Cassava 2021 <br/>
+                            <small><b>CYCLE- </b> Rainy Season 2021</small><br/>
+                            <small><b>Type- </b> Cassava</small><br/>
 
-                            <FaTrashAlt />
+                        </td>
+                        <td>
+                            <small className="text-white px-3 py-2 bg-dark"><b>QTY- </b>10</small>
+                            <small className="text-white px-3 py-2 bg-success2"><b>Price- </b>540,000</small>
+                        </td>
 
+                        <td>
+                            <span className="text-success"><b> # 0 : yeilding</b></span>
                         </td>
 
                     </tr>
@@ -73,4 +81,4 @@ const ReportComponent = () => {
     )
 }
 
-export default ReportComponent
+export default ActivePackComponent

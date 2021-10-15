@@ -1,7 +1,7 @@
 import { http } from './httpService';
 
 export const login = (data) => {
-    return http.post("/super-admin/signin", data)
+    return http.post("/super-admin/sign-in", data)
 }
 
 export const createAdmin = (data) => {

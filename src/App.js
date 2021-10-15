@@ -17,10 +17,12 @@ import Overview from './pages/Overview';
 import NotFoundPage from './pages/404Page';
 import Categories from './pages/Categories';
 import Auth from './pages/Auth';
+import CreateAdmin from './pages/createAdmin';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import {Alert} from 'react-bootstrap';
 import {useState} from '@hookstate/core';
 import store from './store/store';
+import Packs from "./pages/Packs";
 
 
 function App() {
@@ -42,18 +44,31 @@ function App() {
             <ProtectedRoute path="/dashboard"> 
               <Overview /> 
             </ProtectedRoute>
+
             <ProtectedRoute path="/posts">
               <ListPosts />
             </ProtectedRoute>
+
             <ProtectedRoute path="/items">
               <Farms />
             </ProtectedRoute>
+
+            <ProtectedRoute path="/createadmin">
+              <CreateAdmin />
+            </ProtectedRoute>
+
+            <ProtectedRoute path="/subscriptions">
+              <Packs />
+            </ProtectedRoute>
+
             <ProtectedRoute path="/item-type">
               <Type />
             </ProtectedRoute>
+
             <ProtectedRoute path="/cycle">
               <Cycle />
             </ProtectedRoute>
+
             <ProtectedRoute path="/reports">
               <Report/>
             </ProtectedRoute>
@@ -61,15 +76,19 @@ function App() {
             <ProtectedRoute path="/users">
               <User />
             </ProtectedRoute>
+
             <ProtectedRoute path="/categories">
               <Categories />
             </ProtectedRoute>
+
             <ProtectedRoute path="/add_blog_post">
               <CreateNewBlogPost />
             </ProtectedRoute>
+
             <ProtectedRoute path="/posts/edit/:uuid">
               <EditPost />
             </ProtectedRoute>
+
             <Route path="*" component={NotFoundPage} />
           </Switch>
         </Layout>

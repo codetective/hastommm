@@ -5,6 +5,7 @@ import {deleteFarm} from '../../apiServices/farmServices';
 import React, {useEffect} from 'react';
 import store from '../../store/store';
 import { useState } from '@hookstate/core';
+import {FaTrashAlt} from "react-icons/fa";
 
 
 // import {Select} from "@chakra-ui/react";
@@ -142,9 +143,9 @@ const FarmComponent = ({data, setContentChanged, contentChanged}) => {
                                 <td className="text-success fw-bold">{item.amount}</td>
                                 <td className="alert alert-primary">{item.type.name}</td>
                                 <td>{item.cycle.label}</td>
-                                <td>
-                                    <span className="btn btn-dark btn-sm mr-2">View</span>
-                                    <span className="btn btn-dark btn-sm" onClick={() => onDelete(item.id)}>Delete</span>
+                                <td className="d-flex align-items-center">
+                                    <span className="text-decoration-underline pointer me-3">View</span>
+                                    <FaTrashAlt onClick={() => onDelete(item.id)} />
                                 </td>
                             </tr>
                         ))}

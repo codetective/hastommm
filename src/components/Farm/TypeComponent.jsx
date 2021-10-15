@@ -7,7 +7,7 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
-    useDisclosure, Input,
+    useDisclosure, Input, Avatar, Divider,
 } from "@chakra-ui/react"
 import React from "react";
 import {switchFarmTypeStatus, editFarmType, createFarmTypeWithDocument} from "../../apiServices/farmTypeServices";
@@ -141,30 +141,44 @@ const TypeComponent = ({data, contentChanged, setContentChanged}) => {
 
     return (
 
-        <div classname="tab-component-wrapper">
-            <div className="card type-card bg-dark text-white col-lg-6 col-md-12 col-12 shadow-sm border-0 p-4">
-                <h1 className="mb-2 bold text-white">{data.name}</h1>
-                <p>{data.short_description}</p>
-                <div className="mt-3 form-check form-switch">
-                    <input 
-                        className="form-check-input" 
-                        type="checkbox" 
-                        id="flexSwitchCheckDefault" 
+        <div className="col-lg-6 col-md-12 col-12  px-lg-3 ">
+            <div className="w-100 rounded-2 bg-dark shadow-sm border-0 text-white  p-4 my-3">
+                <span className="d-md-flex justify-content-between flex-wrap mb-2">
+                    <div className="d-flex align-items-center">
+                    <Avatar
+                        size={'sm'}
+                        src={
+                            'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                        }
+                    />
+                    <span className="ms-2">
+                        <h1 className="mb-1 bold text-white">{data.name}</h1>
+
+                    </span>
+
+                </div>
+                    <div className="my-2 form-check form-switch">
+                    <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="flexSwitchCheckDefault"
                         checked={data.status === 1 ? true : false}
                         onChange={() => toggleFarmStatus(data.id)}
                     />
                     <label className="form-check-label text-muted" >{data.status === 1 ? "Close Farm" : "Open Farm"}
                     </label>
                 </div>
+                </span>
+                <Divider className="mb-2" opacity="0.1"/>
 
-                <div className="mt-3 d-flex flex-wrap justify-content-between align-items-center">
+                <p>{data.short_description}</p>
+
+                <div className="mt-4 d-flex flex-wrap justify-content-end align-items-center">
                     <div>
                         <span  onClick={onOpen}  className="btn btn-sm btn-success pointer">View / Edit</span>
                     </div>
                 </div>
             </div>
-
-
             <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
                 <ModalOverlay />
                 <ModalContent className="mt-0 rounded-0 p-md-5">
