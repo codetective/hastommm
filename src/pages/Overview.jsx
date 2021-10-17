@@ -9,11 +9,13 @@ import OverviewCard from '../components/Overview/OverviewCard';
 import SubscriptionOverview from '../components/Overview/SubscriptionOverview';
 import {getCycle} from '../apiServices/cycleServices';
 import {getArticles} from '../apiServices/articleService';
+import {getAllPacks} from '../apiServices/packServices';
 import ContentLoader from '../components/ContentLoader/ContentLoader';
 
 const Overview = () => {
   const [totalCycles, setTotalCycles] = useState(0)
   const [totalArticles, setTotalArticles] = useState(0)
+  const [totalPendingOrder, setTotalPendingOrder] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -33,10 +35,23 @@ const Overview = () => {
 
   useEffect(() => {
     const fetch = async() => {
-      setIsLoading(true)
       try{
         const res = await getArticles()
         setTotalArticles(res.data.meta.total)
+      }
+      catch(err){
+        console.log(err)
+      }
+    }
+    fetch()
+  }, [])
+
+  useEffect(() => {
+    const fetch = async() => {
+      try{
+        const res = await getAllPacks()
+        setTotalPendingOrder(res.data.meta.total)
+
       }
       catch(err){
         console.log(err)
@@ -63,7 +78,7 @@ const Overview = () => {
               pageLink="/subscriptions"
               title="Pending Orders"
               icon={GiGroundSprout}
-              stat={0}
+              stat={totalPendingOrder}
           />
           <OverviewCard
               pageLink="/cycle"

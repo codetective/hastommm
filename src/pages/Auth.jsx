@@ -52,7 +52,7 @@ const Auth = () => {
             history.push("/dashboard")
           }
           else{
-            alertMessage.set("Registeration Failed")
+            alertMessage.set("Invalid Username and Password")
             alertType.set("danger")
             alertNotification.set(true)
             setTimeout(() => {
@@ -64,7 +64,7 @@ const Auth = () => {
         }
         catch(err){
           console.log(err)
-          alertMessage.set("An Error Occured")
+          alertMessage.set("Invalid Username and Password")
             alertType.set("danger")
             alertNotification.set(true)
             setTimeout(() => {

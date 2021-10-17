@@ -1,9 +1,28 @@
 import {Form, Row, Col} from 'react-bootstrap';
 import {FaCheckCircle, FaTrashAlt} from "react-icons/fa";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {getAllPacks} from '../../apiServices/packServices';
+
 
 
 const ActivePackComponent  = () => {
+    const [activePack, setActivePack] = useState([])
+
+    useEffect(() => {
+        const fetch = async() => {
+            try{
+                const res = await getAllPacks()
+                console.log(res)
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+        fetch()
+    }
+    , [])
+
+    
     return (
         <div classname="tab-component-wrapper">
 

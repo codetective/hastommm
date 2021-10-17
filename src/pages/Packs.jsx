@@ -2,16 +2,38 @@ import {Tabs, Tab} from 'react-bootstrap';
 import PendingPackComponent from '../components/Farm/PendingPackComponent';
 import ActivePackComponent from '../components/Farm/ActivePackComponent';
 import {FaUserAlt} from "react-icons/fa";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {GiGroundSprout} from "react-icons/gi";
-
+import {getAllPacks} from '../apiServices/packServices';
+import ContentLoader from '../components/ContentLoader/ContentLoader';
 
 
 const Farms = () => {
+    const [totalPacks, setTotalPacks] = useState(0)
+    const [activePacks, setActivePacks] = useState(0)
+    const [pendingPacks, setPendingPacks] = useState(0)
 
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+    const fetch = async() => {
+      setIsLoading(true)
+      try{
+        const res = await getAllPacks()
+        console.log(res)
+      }
+      catch(err){
+        console.log(err)
+      }
+      setIsLoading(false)
+    }
+    fetch()
+  }, [])
 
     return (
-
+        isLoading ?
+        <ContentLoader />
+        :
         <div className="farm-wrapper">
 
             <div className="d-flex flex-column">
@@ -25,7 +47,7 @@ const Farms = () => {
                         <div className="component">
 
                             <div className="component-header text-white"> Total Packs </div>
-                            <div className="component-qty text-white">95</div>
+                            <div className="component-qty text-white">{totalPacks}</div>
                         </div>
 
                     </div>
@@ -33,7 +55,7 @@ const Farms = () => {
                     <div className="farm-card bg-success">
                         <div className="component">
                             <div className="component-header text-white"> Active Packs</div>
-                            <div className="component-qty text-white">90</div>
+                            <div className="component-qty text-white">{activePacks}</div>
                         </div>
 
                     </div>
@@ -41,7 +63,7 @@ const Farms = () => {
                     <div className="farm-card bg-danger">
                         <div className="component">
                             <div className="component-header text-white"> Pending Packs</div>
-                            <div className="component-qty text-white">5</div>
+                            <div className="component-qty text-white">{pendingPacks}</div>
                         </div>
 
                     </div>
