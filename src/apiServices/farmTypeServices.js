@@ -16,12 +16,12 @@ export const deleteFarmType = (id) => {
     return http.delete(`/item-type/delete/${id}`)
 }
 
-export const switchFarmTypeStatus = (id) => {
-    return http.put(`/item-type/switch-status/${id}`)
+export const switchFarmTypeStatus = (id, state) => {
+    return http.put(`/item-type/switch-status/${id}?status=${state}`)
 }
 
-export const updateFarmTypeImage = (id) => {
-    return http.put(`/item-type/upload-image/${id}`)
+export const updateFarmTypeImage = (id, data) => {
+    return http.put(`/item-type/upload-image/${id}`, data)
 }
 
 export const createFarmTypeWithDocument = (data) => {

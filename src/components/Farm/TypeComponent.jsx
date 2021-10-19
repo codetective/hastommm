@@ -10,7 +10,7 @@ import {
     useDisclosure, Input, Avatar, Divider,
 } from "@chakra-ui/react"
 import React from "react";
-import {switchFarmTypeStatus, editFarmType, createFarmTypeWithDocument} from "../../apiServices/farmTypeServices";
+import {switchFarmTypeStatus, editFarmType, createFarmTypeWithDocument, updateFarmTypeImage} from "../../apiServices/farmTypeServices";
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import store from '../../store/store';
@@ -20,11 +20,17 @@ import {Spinner, Alert} from 'react-bootstrap';
 const TypeComponent = ({data, contentChanged, setContentChanged}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
-    const toggleFarmStatus = async(id) => {
+    const toggleFarmStatus = async(id, status) => {
         try{
-            // data.status = 0
-            const res = await switchFarmTypeStatus(id)
-            console.log(res)
+            let res
+            if(status === null || status === 0){
+                res = await switchFarmTypeStatus(id, 1)
+                console.log(res)
+            }
+            else{
+                res = await switchFarmTypeStatus(id, 0)
+                console.log(res)
+            }
             if(res.data.success === true){
                 setContentChanged(contentChanged + 1)
             }
@@ -89,6 +95,10 @@ const TypeComponent = ({data, contentChanged, setContentChanged}) => {
         const [fileInputError, setFileInputError] = React.useState(null)
         const [isFileUploading, setIsFileUploading] = React.useState(false)
 
+        const [imageInput, setImageInput] = React.useState(null)
+        const [imageInputError, setImageInputError] = React.useState(null)
+        const [isImageUploading, setIsImageUploading] = React.useState(false)
+
         const onEditTypeDocumentSubmit = async() => {
             if(fileInput){
                 setIsFileUploading(true)
@@ -139,6 +149,56 @@ const TypeComponent = ({data, contentChanged, setContentChanged}) => {
         
         }
 
+        const onEditTypeImageSubmit = async() => {
+            if(fileInput){
+                setIsImageUploading(true)
+                try{
+                    const formData = new FormData() 
+                    formData.append("name", data.name);
+                    formData.append("type_id", data.id);
+                    formData.append("file", imageInput, imageInput.name);
+                    const res = await updateFarmTypeImage(data.id, formData)
+                    if(res.status === 200){
+                      alertMessage.set("Image Added Successfully")
+                      alertType.set("success")
+                      alertNotification.set(true)
+                      setContentChanged(contentChanged + 1)
+                      setTimeout(() => {
+                        alertNotification.set(false)
+                        alertMessage.set("")
+                        alertType.set("")
+                      }, 1000);
+                    }
+                    else{
+                      alertMessage.set("Failed to Add Image")
+                      alertType.set("danger")
+                      alertNotification.set(true)
+                      setTimeout(() => {
+                        alertNotification.set(false)
+                        alertMessage.set("")
+                        alertType.set("")
+                      }, 1000);
+                    }
+                  }
+                  catch(err){
+                    console.log(err)
+                    alertMessage.set("An Error Occured")
+                      alertType.set("danger")
+                      alertNotification.set(true)
+                      setTimeout(() => {
+                        alertNotification.set(false)
+                        alertMessage.set("")
+                        alertType.set("")
+                      }, 1000);
+                  }
+                setIsImageUploading(false)
+            }   
+            else{
+                setFileInputError("No File Selected")
+            } 
+        
+        }
+
     return (
 
         <div className="col-lg-6 col-md-12 col-12  px-lg-3 ">
@@ -163,7 +223,7 @@ const TypeComponent = ({data, contentChanged, setContentChanged}) => {
                         type="checkbox"
                         id="flexSwitchCheckDefault"
                         checked={data.status === 1 ? true : false}
-                        onChange={() => toggleFarmStatus(data.id)}
+                        onChange={() => toggleFarmStatus(data.id, data.status)}
                     />
                     <label className="form-check-label text-muted" >{data.status === 1 ? "Close Farm" : "Open Farm"}
                     </label>
@@ -246,10 +306,23 @@ const TypeComponent = ({data, contentChanged, setContentChanged}) => {
                                 </div>
 
                                 <div className="col-lg-6  col-12 ps-lg-4">
-                                    {/* <div className="mb-4">
+                                    <div className="mb-4">
                                         <h3 className="mb-1" >Default Image</h3>
-                                        <input className="form-control" type="file" id="formFile"/>
-                                    </div> */}
+                                        <input 
+                                            className="form-control" 
+                                            type="file" 
+                                            id="formFile"
+                                            filename={imageInput && imageInput.name}
+                                            onChange={(e) => setImageInput(e.target.files[0])}
+                                        />
+                                        <button type="submit" className="btn-success px-3 btn mt-2" onClick={onEditTypeImageSubmit}>
+                                        {isImageUploading ?
+                                            <Spinner animation="border" size="sm"/>
+                                            :
+                                            "Save"
+                                            }
+                                        </button>
+                                    </div>
                                     <div className="mb-4">
                                         <h3 className="mb-1" >Upload a Documents in PDF Files Max 3</h3>
                                         <input 

@@ -63,7 +63,7 @@ export default function Cycle() {
 
     const onSubmit = async(value) => {
         try{
-          const res = await getCycle(value)
+          const res = await generateReportForCycle(value)
           if(res.status === 200){
             alertMessage.set("Report Generated")
             alertType.set("success")

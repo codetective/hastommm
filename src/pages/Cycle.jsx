@@ -116,7 +116,7 @@ export default function Cycle() {
             <div className="farm-tab-section mt-4">
                 <Tabs defaultActiveKey="cycle" id="uncontrolled-tab-example" className="mb-3">
                     <Tab eventKey="cycle" title="List of Cycles">
-                        <CycleComponent data={cycles}/>
+                        <CycleComponent data={cycles} contentChanged={contentChanged} setContentChanged={setContentChanged}/>
                     </Tab>
                 </Tabs>
             </div>

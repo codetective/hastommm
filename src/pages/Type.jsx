@@ -69,9 +69,7 @@ export default function Cycle() {
 
     const onSubmit = async(value) => {
         try{
-            console.log(value)
           const res = await createFarmType(value)
-          console.log(res)
           if(res.status === 200){
             alertMessage.set("Farm Type Created Successfully")
             alertType.set("success")
