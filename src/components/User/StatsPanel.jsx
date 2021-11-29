@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import OverviewBox from './OverviewBox';
 import {GiGroundSprout} from "react-icons/gi";
 
-export default function StatsPanel() {
+export default function StatsPanel({email, location, phone}) {
   return (
     <Box bg="gray.100" border="1px solid #efefef">
       <Container maxW="container.xl" px={8} py={1} >
@@ -45,13 +45,13 @@ export default function StatsPanel() {
             <HStack spacing="10px">
               <FaEnvelope className='text-success'/>
               <Text as="small" className="afont" mx="0">
-                omololadaniel@gmail.com
+                {email}
               </Text>
             </HStack>
-            <b>08149423902</b>
+            <b>{phone}</b>
             <HStack spacing="10px">
               <FaMapPin/>
-              <Text as="small">Lagos</Text>
+              <Text as="small">{location}</Text>
             </HStack>
 
           </Stack>

@@ -2,7 +2,7 @@ import {Form, Row, Col} from 'react-bootstrap';
 import {FaTrashAlt} from "react-icons/fa";
 import React from "react";
 
-const ReportComponent = () => {
+const ReportComponent = ({report}) => {
     return (
         <div classname="tab-component-wrapper">
 
@@ -51,20 +51,19 @@ const ReportComponent = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><b>15/20/2021</b></td>
-                        <td>Fertilizer pack</td>
-                        <td>Monthly weed clearing and applying of yeast fertilizer using our sprays and mixing c4 packages.</td>
-                        <td>Rainy Season 2021</td>
-
-                        <td className="d-flex align-items-center">
-                            <span className="text-decoration-underline pointer me-3">View</span>
-
-                            <FaTrashAlt />
-
-                        </td>
-
-                    </tr>
+                    {report.map(data => (
+                        <tr key={data.id}>
+                            <td><b>15/20/2021</b></td>
+                            <td>{data.title}</td>
+                            <td>{data.description}</td>
+                            <td>Rainy Season 2021</td>
+                            <td className="d-flex align-items-center">
+                                <span className="text-decoration-underline pointer me-3">View</span>
+                                <FaTrashAlt />
+                            </td>
+                        </tr>
+                    ))}
+                    {console.log(report)}
                     </tbody>
                 </table>
             </div>

@@ -18,14 +18,35 @@ import {
     ModalOverlay, useDisclosure
 } from "@chakra-ui/react";
 import StatsPanel from './StatsPanel';
-import React from "react";
+import React, {useState, useEffect} from "react";
 import src from '../../assets/farm.jpg';
 import UserActivePackComponent from "../User/UserActivePackComponent";
 import UserPendingPackComponent from "../User/UserPendingPackComponent";
 import {FaBackspace} from "react-icons/all";
+import { getAllUsers } from '../../apiServices/userServices';
 
 const UserComponent = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [user, setUser] = useState([])
+    const [userDetail, setUserDetail] = useState({})
+
+    useEffect(() => {
+        const fetch = async() => {
+          try{
+            const res = await getAllUsers()
+            setUser(res.data.data)
+          }
+          catch(err){
+            console.log(err)
+          }
+        }
+        fetch()
+      }, [])
+
+      const viewUserDetail = (detail) => {
+        setUserDetail(detail)
+        onOpen()
+      }
     return (
         <div classname="tab-component-wrapper">
 
@@ -71,15 +92,18 @@ const UserComponent = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><b>1</b></td>
-                        <td><b> James Demiji</b> <br/> jamedi74@gmail.com</td>
-                        <td><b>0825412398</b></td>
-                        <td className="text-success"><b>14</b></td>
-                        <td className="text-danger"><b>2</b></td>
-                        <td><span onClick={onOpen} className="btn btn-dark btn-sm">View</span></td>
+                    {user.map((data, index) => (
+                    <tr key={data.id}>
+                        <td><b>{index + 1}</b></td>
+                        <td><b> {data.name}</b> <br/> {data.email}</td>
+                        <td><b>{data.phone_number ? data.phone_number : "-"}</b></td>
+                        <td className="text-success"><b>-</b></td>
+                        <td className="text-danger"><b>-</b></td>
+                        <td><span onClick={() => viewUserDetail(data)} className="btn btn-dark btn-sm">View</span></td>
 
                     </tr>
+                    ))}
+                    
                     </tbody>
                 </table>
             </div>
@@ -103,7 +127,7 @@ const UserComponent = () => {
                                         color="white"
                                         border="2px solid #fafafa"
                                     />
-                                    Omolola Daniel
+                                    {userDetail.name}
                                 </WrapItem>
 
                             </ModalHeader>
@@ -111,7 +135,11 @@ const UserComponent = () => {
                         <section className="d-flex flex-wrap">
                             <div className="col-12">
                                 <Stack>
-                                    <StatsPanel />
+                                    <StatsPanel 
+                                        email={userDetail.email}
+                                        location={userDetail.location}
+                                        phone={userDetail.phone_number}
+                                    />
                                 </Stack>
                             </div>
 

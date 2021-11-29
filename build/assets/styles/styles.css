@@ -11,9 +11,13 @@
         font-family: 'Poppins', sans-serif !important;
     }
     
+    .pointer {
+        cursor: pointer;
+    }
+    
     .farm-header h2 {
         font-size: 26px;
-        font-weight: bold;
+        font-weight: 500;
         color: #222222;
     }
     
@@ -25,16 +29,17 @@
     .farm-cards .farm-card,
     .farm-image-card {
         background-color: #FFFFFF;
+        border-radius: 5px;
+        border: solid 1px #e2e8f0;
     }
     
     .farm-cards .farm-card {
         margin-top: 20px;
-        padding: 25px 25px;
+        padding: 15px 25px;
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
-        width: 400px;
-        margin-right: 25px;
+        justify-content: start;
+        width: auto;
     }
     
     .farm-cards .farm-image-card {
@@ -80,15 +85,19 @@
         border: 1px solid green;
     }
     
+    .bd {
+        border: 1px solid red !important;
+    }
+    
     .farm-cards .farm-card .component .component-header {
-        font-weight: 500 ;
+        font-weight: 600;
         color: rgba(172, 172, 172);
         font-size: 18 px;
     }
     
     .farm-cards .farm-card .component .component-qty {
         font-size: 20px;
-        font-weight: 500;
+        font-weight: 600;
         color: #222222;
         margin-top: 5px;
     }
@@ -104,7 +113,7 @@
     }
     
     .farm-tab-section {
-        margin-top: 40px;
+        margin-top: 20px;
     }
     
     .farm-tab-section nav a {
@@ -122,20 +131,19 @@
     }
     
     .mini-card {
-        height: 50px;
-        width: 70%;
         background-color: #FFFFFF;
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
-        padding: 10px 15px;
+        flex-wrap: wrap;
+        justify-content: start;
+        align-items: center;
+        padding: 15px 20px;
     }
     
     .mini-card .card-name {
         font-size: 13px;
         font-weight: bold;
         margin-right: 10px;
-        margin-top: 5px;
     }
     
     .btn-add-outline {
@@ -151,13 +159,16 @@
         color: #FFFFFF !important;
     }
     
+    .table-section {
+        overflow: auto;
+    }
+    
     .table-section table {
         width: 100%;
     }
     
     .table-section table thead {
         background-color: #FFFFFF;
-        height: 50px;
         margin-bottom: 30px;
         border: 1px solid rgba(172, 172, 172, .1);
     }
@@ -168,7 +179,187 @@
     
     .table-section table tbody {
         background-color: #FFFFFF;
-        border-top: 20px solid rgba(245, 245, 247) !important;
-        border: 1px solid rgba(172, 172, 172, .1);
         padding: 10px 0px;
     }
+    
+    .tabx {
+        font-size: 13px;
+        border-collapse: separate;
+        border-spacing: 0px 4px !important;
+    }
+    
+    over-h {
+        overflow: hidden;
+    }
+    
+    .tabx th,
+    .tabx tr td {
+        padding: 20px 10px 20px 10px;
+        vertical-align: middle;
+        border: 0.5px solid rgba(100, 100, 100, 0.05) !important;
+        white-space: nowrap;
+    }
+    
+    .tabx tr {
+        /* border: none !important;   */
+        background: #fff;
+        box-shadow: 0px 1px 3px 0px rgb(54 74 99 / 5%);
+    }
+    
+    .tabx tr:hover {
+        box-shadow: 0px 7px 4px 3px rgba(126, 187, 194, 0.01);
+        background: #FDFDFF !important;
+    }
+    
+    .tabx tr th:first-child {
+        padding: 20px 5px 20px 10px !important;
+    }
+    
+    .tabx .descr {
+        white-space: normal;
+    }
+    
+    .bg-success2 {
+        background: #339900 !important;
+        color: #FFFFFF;
+    }
+    
+    .btn-cls,
+    .btn-cls:focus,
+    .btn-cls:hover {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    /*Login*/
+    
+    .login-page {
+        width: 100%;
+        padding: 8% 0 0;
+        margin: auto;
+    }
+    
+    .form {
+        position: relative;
+        z-index: 1;
+        background: #FFFFFF;
+        max-width: 360px;
+        margin: 0 auto 100px;
+        padding: 45px;
+        text-align: center;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+    
+    .form input {
+        font-family: "Roboto", sans-serif;
+        outline: 0;
+        background: #f2f2f2;
+        width: 100%;
+        border: 0;
+        margin: 0 0 15px;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+    
+    .form button {
+        font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        outline: 0;
+        background: #4CAF50 !important;
+        width: 100%;
+        border: 0;
+        padding: 15px;
+        color: #FFFFFF;
+        font-size: 14px;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+        -moz-transition: all 0.3 ease;
+        -ms-transition: all 0.3 ease;
+        -o-transition: all 0.3 ease;
+    }
+    
+    .form button:hover,
+    .form button:active,
+    .form button:focus {
+        border: 1px solid #43A047;
+        color: #43A047;
+        background-color: transparent !important;
+    }
+    
+    .form .message {
+        margin: 15px 0 0;
+        color: #b3b3b3;
+        font-size: 12px;
+    }
+    
+    .form .message a {
+        color: #4CAF50;
+        text-decoration: none;
+    }
+    
+    .form .register-form {
+        /* display: none; */
+    }
+    
+    .container {
+        position: relative;
+        z-index: 1;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .container:before,
+    .container:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+    
+    .container .info {
+        margin: 50px auto;
+        text-align: center;
+    }
+    
+    .container .info h1 {
+        margin: 0 0 15px;
+        padding: 0;
+        font-size: 36px;
+        font-weight: 300;
+        color: #1a1a1a;
+    }
+    
+    .container .info span {
+        color: #4d4d4d;
+        font-size: 12px;
+    }
+    
+    .container .info span a {
+        color: #000000;
+        text-decoration: none;
+    }
+    
+    .container .info span .fa {
+        color: #EF3B3A;
+    }
+    
+    .alert-p {
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    .content-loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 70vh;
+    }
+    /* .farm-type-card-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .type-card {
+        width: 100%
+    } */

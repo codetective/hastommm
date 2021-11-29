@@ -22,19 +22,37 @@ import * as Yup from 'yup';
 import store from '../store/store';
 import { useState } from '@hookstate/core';
 import {Spinner, Alert} from 'react-bootstrap';
-import {generateReportForCycle} from '../apiServices/ReportServices';
+import {generateReportForCycle, getAllReports} from '../apiServices/ReportServices';
 import {getCycle} from '../apiServices/cycleServices';
 
 
 export default function Cycle() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [cycles, setCycles] = React.useState([])
+    const [totalReports, setTotalReports] = React.useState(0)
+    const [generalReports, setGeneralReports] = React.useState([])
+
+
 
     useEffect(() => {
         const fetch = async() => {
             try{
                 const res = await getCycle()
                 setCycles(res.data.data)
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+        fetch()
+    }, [])
+
+    useEffect(() => {
+        const fetch = async() => {
+            try{
+                const res = await getAllReports()
+                setTotalReports(res.data.data.length)
+                setGeneralReports(res.data.data)
             }
             catch(err){
                 console.log(err)
@@ -108,7 +126,7 @@ export default function Cycle() {
                         <FaFileAlt className="me-2 fs-1 text-warning"/>
                         <div>
                             <div className="component-header fw-bold"> Total Reports </div>
-                            <div className="fw-normal fs-5">5000</div>
+                            <div className="fw-normal fs-5">{totalReports}</div>
                         </div>
 
                     </div>
@@ -120,7 +138,9 @@ export default function Cycle() {
             <div className="farm-tab-section mt-4">
                 <Tabs defaultActiveKey="reports" id="uncontrolled-tab-example" className="mb-3">
                     <Tab eventKey="reports" title="General Records">
-                        <ReportComponent />
+                        <ReportComponent 
+                            report={generalReports}
+                        />
                     </Tab>
                     <Tab eventKey="reports2" title="Targeted Reports">
                         <Report2Component />

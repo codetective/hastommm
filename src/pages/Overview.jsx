@@ -10,11 +10,13 @@ import SubscriptionOverview from '../components/Overview/SubscriptionOverview';
 import {getCycle} from '../apiServices/cycleServices';
 import {getArticles} from '../apiServices/articleService';
 import {getAllPacks} from '../apiServices/packServices';
+import {getAllUsers} from '../apiServices/userServices';
 import ContentLoader from '../components/ContentLoader/ContentLoader';
 
 const Overview = () => {
   const [totalCycles, setTotalCycles] = useState(0)
   const [totalArticles, setTotalArticles] = useState(0)
+  const [totalUsers, setTotalUsers] = useState(0)
   const [totalPendingOrder, setTotalPendingOrder] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -25,6 +27,19 @@ const Overview = () => {
         const res = await getCycle()
         setTotalCycles(res.data.data.length)
         setIsLoading(false)
+      }
+      catch(err){
+        console.log(err)
+      }
+    }
+    fetch()
+  }, [])
+
+  useEffect(() => {
+    const fetch = async() => {
+      try{
+        const res = await getAllUsers()
+        setTotalUsers(res.data.meta.total)
       }
       catch(err){
         console.log(err)
@@ -72,7 +87,7 @@ const Overview = () => {
               pageLink="/users"
               title="Total Users"
               icon={FaUserFriends}
-              stat={100}
+              stat={totalUsers}
           />
           <OverviewCard
               pageLink="/subscriptions"
