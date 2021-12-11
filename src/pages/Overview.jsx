@@ -2,12 +2,13 @@ import { Box, SimpleGrid, Stack } from '@chakra-ui/react';
 import {useEffect, useState} from 'react';
 import PageTitle from '../components/Global/PageTitle';
 import { ImNewspaper } from 'react-icons/im';
-import { FaUserFriends,FaCalendarAlt } from 'react-icons/fa';
+import {FaUserFriends, FaCalendarAlt, FaLeaf} from 'react-icons/fa';
 import { SiGooglemessages } from 'react-icons/si';
 import { GiGroundSprout } from 'react-icons/gi';
 import OverviewCard from '../components/Overview/OverviewCard';
 import SubscriptionOverview from '../components/Overview/SubscriptionOverview';
 import {getCycle} from '../apiServices/cycleServices';
+import {getFarm} from '../apiServices/farmServices';
 import {getArticles} from '../apiServices/articleService';
 import {getAllPacks} from '../apiServices/packServices';
 import {getAllUsers} from '../apiServices/userServices';
@@ -18,6 +19,7 @@ const Overview = () => {
   const [totalArticles, setTotalArticles] = useState(0)
   const [totalUsers, setTotalUsers] = useState(0)
   const [totalPendingOrder, setTotalPendingOrder] = useState(0)
+  const [totalFarm, setTotalFarm] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -35,11 +37,28 @@ const Overview = () => {
     fetch()
   }, [])
 
+
+  useEffect(() => {
+    const fetch = async() => {
+      setIsLoading(true)
+      try{
+        const res = await getFarm()
+        setTotalFarm(res.data.data.length)
+        setIsLoading(false)
+      }
+      catch(err){
+        console.log(err)
+      }
+    }
+    fetch()
+  }, [])
+
+
   useEffect(() => {
     const fetch = async() => {
       try{
         const res = await getAllUsers()
-        setTotalUsers(res.data.meta.total)
+        setTotalUsers(res.data.data.length)
       }
       catch(err){
         console.log(err)
@@ -94,6 +113,12 @@ const Overview = () => {
               title="Pending Orders"
               icon={GiGroundSprout}
               stat={totalPendingOrder}
+          />
+          <OverviewCard
+              pageLink="/cycle"
+              title="Farms"
+              icon={FaLeaf}
+              stat={totalFarm}
           />
           <OverviewCard
               pageLink="/cycle"

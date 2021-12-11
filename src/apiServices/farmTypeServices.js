@@ -9,7 +9,7 @@ export const getFarmType = () => {
 }
 
 export const editFarmType = (id, data) => {
-    return http.put(`/item-type/update/${id}`, data)
+    return http.post(`/item-type/update/${id}`, data)
 }
 
 export const deleteFarmType = (id) => {
@@ -21,7 +21,7 @@ export const switchFarmTypeStatus = (id, state) => {
 }
 
 export const updateFarmTypeImage = (id, data) => {
-    return http.put(`/item-type/upload-image/${id}`, data)
+    return http.post(`/item-type/upload-image/${id}`, data)
 }
 
 export const createFarmTypeWithDocument = (data) => {

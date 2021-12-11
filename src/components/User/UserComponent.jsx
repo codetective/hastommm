@@ -97,13 +97,15 @@ const UserComponent = () => {
                         <td><b>{index + 1}</b></td>
                         <td><b> {data.name}</b> <br/> {data.email}</td>
                         <td><b>{data.phone_number ? data.phone_number : "-"}</b></td>
-                        <td className="text-success"><b>-</b></td>
-                        <td className="text-danger"><b>-</b></td>
+                        <td className="text-success"><b><b>{data.packs.length ? data.packs.length : "-"}</b></b></td>
+                        <td className="text-danger">
+                           -
+                        </td>
                         <td><span onClick={() => viewUserDetail(data)} className="btn btn-dark btn-sm">View</span></td>
 
                     </tr>
                     ))}
-                    
+
                     </tbody>
                 </table>
             </div>
@@ -135,7 +137,10 @@ const UserComponent = () => {
                         <section className="d-flex flex-wrap">
                             <div className="col-12">
                                 <Stack>
-                                    <StatsPanel 
+                                    <StatsPanel
+                                        totalprofit={userDetail.total_profit_gotten ? userDetail.total_profit_gotten : "0"}
+                                        totalpacks={userDetail.packs.length ? userDetail.packs.length : "0"}
+                                        totalcapital={userDetail.total_capital_invested ? userDetail.total_capital_invested : "0"}
                                         email={userDetail.email}
                                         location={userDetail.location}
                                         phone={userDetail.phone_number}

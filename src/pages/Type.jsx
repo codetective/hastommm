@@ -158,7 +158,7 @@ export default function Cycle() {
                             <div>
                                 <ModalHeader className="px-0 mt-3 d-flex flex-wrap justify-content-between">
                                     Create Farm Type
-                                    <button type="submit" className="btn-success px-3 btn">Done</button>
+                                    {/*<button type="submit" className="btn-success px-3 btn">Done</button>*/}
                                 </ModalHeader>
                             </div>
                             <p className="mb-4">Note: This farm type should be well described with your proper Documents Uploaded in PDF format </p>

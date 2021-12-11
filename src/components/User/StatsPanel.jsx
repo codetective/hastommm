@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import OverviewBox from './OverviewBox';
 import {GiGroundSprout} from "react-icons/gi";
 
-export default function StatsPanel({email, location, phone}) {
+export default function StatsPanel({totalprofit, totalcapital, totalpacks, email, location, phone}) {
   return (
     <Box bg="gray.100" border="1px solid #efefef">
       <Container maxW="container.xl" px={8} py={1} >
@@ -21,7 +21,7 @@ export default function StatsPanel({email, location, phone}) {
             iconColor="green.600"
             icon={<FaChartPie />}
             title="capital invested"
-            value="$5900.00"
+            value={totalcapital}
             index={0}
           />
 
@@ -29,7 +29,7 @@ export default function StatsPanel({email, location, phone}) {
             iconColor="green.400"
             icon={<FaChartLine />}
             title="overall profits"
-            value="$950.00"
+            value={totalprofit}
             index={1}
           />
 
@@ -37,7 +37,7 @@ export default function StatsPanel({email, location, phone}) {
             iconColor="secondary.100"
             icon={<GiGroundSprout />}
             title="Total Farm Packs"
-            value="4"
+            value={totalpacks}
             index={2}
           />
 
