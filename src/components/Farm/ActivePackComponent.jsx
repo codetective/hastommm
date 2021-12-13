@@ -1,28 +1,10 @@
 import {Form, Row, Col} from 'react-bootstrap';
-import {FaCheckCircle, FaTrashAlt} from "react-icons/fa";
-import React, {useEffect, useState} from "react";
-import {getAllPacks} from '../../apiServices/packServices';
+import React from "react";
 
 
 
-const ActivePackComponent  = () => {
-    const [activePack, setActivePack] = useState([])
+const ActivePackComponent  = ({pack}) => {
 
-    useEffect(() => {
-        const fetch = async() => {
-            try{
-                const res = await getAllPacks()
-                console.log(res)
-            }
-            catch(err){
-                console.log(err)
-            }
-        }
-        fetch()
-    }
-    , [])
-
-    
     return (
         <div classname="tab-component-wrapper">
 
@@ -71,27 +53,27 @@ const ActivePackComponent  = () => {
                     </tr>
                     </thead>
                     <tbody>
+                    {pack.map(data => (
                     <tr>
-                        <td>Pack ID</td>
+                        <td>{data.id}</td>
                         <td><b>15/20/2021</b></td>
 
-                        <td>Omolola Daniel <br/> <b>email@gmail.com</b><br/> 08149423902</td>
+                        <td>{data.buyer.name} <br/> <b>{data.buyer.email}</b><br/> {data.buyer.phone_number}</td>
                         <td>
-                            <b>Farm: </b>Cassava 2021 <br/>
-                            <small><b>CYCLE- </b> Rainy Season 2021</small><br/>
-                            <small><b>Type- </b> Cassava</small><br/>
-
+                            <b>Farm: </b>{data.item.label} <br/>
+                            <small><b>CYCLE- </b> {data.item.cycle.label}</small><br/>
+                            <small><b>Type- </b> {data.item.type.name}</small><br/>
                         </td>
                         <td>
-                            <small className="text-white px-3 py-2 bg-dark"><b>QTY- </b>10</small>
-                            <small className="text-white px-3 py-2 bg-success2"><b>Price- </b>540,000</small>
+                            <small className="text-white px-3 py-2 bg-dark"><b>QTY- </b>{data.quantity}</small>
+                            <small className="text-white px-3 py-2 bg-success2"><b>Price- </b>{data.capital}</small>
                         </td>
 
                         <td>
-                            <span className="text-success"><b> # 0 : yeilding</b></span>
+                            <span className="text-success"><b> # {data.profit} : yeilding</b></span>
                         </td>
-
                     </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>

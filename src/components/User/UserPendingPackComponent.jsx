@@ -1,9 +1,105 @@
 import {Form, Row, Col} from 'react-bootstrap';
 import {FaCheckCircle, FaTrashAlt} from "react-icons/fa";
-import React from "react";
+import React, {useEffect} from "react";
+import {getPendingPacks, acceptPack, rejectPack} from "../../apiServices/packServices";
+import { useState } from '@hookstate/core';
+import store from '../../store/store';
 
 
-const UserPendingPackComponent  = () => {
+
+const UserPendingPackComponent  = ({id}) => {
+    const [pendingPacks, setPendingPacks] = React.useState([])
+
+
+    const {alertNotification} = useState(store)
+    const {alertType} = useState(store)
+    const {alertMessage} = useState(store)
+
+    useEffect(() => {
+        try{
+            const fetch = async () => {
+                const res = await getPendingPacks(id)
+                setPendingPacks(res.data.data)
+            }
+            fetch()
+        }
+        catch(err){
+            console.log(err)
+        }
+    },[id])
+
+    const onAccept = async(id) => {
+        try{
+            const res = await acceptPack(id)
+            if(res.status === 200 || res.status === 201){
+                alertMessage.set("Order Accepted")
+                alertType.set("success")
+                alertNotification.set(true)
+                setTimeout(() => {
+                  alertNotification.set(false)
+                  alertMessage.set("")
+                  alertType.set("")
+                }, 1000);
+            }
+            else{
+                alertMessage.set("Failed to Accept Order")
+                alertType.set("danger")
+                alertNotification.set(true)
+                setTimeout(() => {
+                  alertNotification.set(false)
+                  alertMessage.set("")
+                  alertType.set("")
+                }, 1000);
+            }
+        }
+        catch(err){
+            alertMessage.set(err.message)
+            alertType.set("danger")
+            alertNotification.set(true)
+            setTimeout(() => {
+              alertNotification.set(false)
+              alertMessage.set("")
+              alertType.set("")
+            }, 1000);
+        }
+    } 
+
+    const onDecline = async(id) => {
+        try{
+            const res = await rejectPack(id)
+            if(res.status === 200 || res.status === 201){
+                alertMessage.set("Order Rejected")
+                alertType.set("success")
+                alertNotification.set(true)
+                setTimeout(() => {
+                  alertNotification.set(false)
+                  alertMessage.set("")
+                  alertType.set("")
+                }, 1000);
+            }
+            else{
+                alertMessage.set("Failed to Reject Order")
+                alertType.set("danger")
+                alertNotification.set(true)
+                setTimeout(() => {
+                  alertNotification.set(false)
+                  alertMessage.set("")
+                  alertType.set("")
+                }, 1000);
+            }
+        }
+        catch(err){
+            alertMessage.set(err.message)
+            alertType.set("danger")
+            alertNotification.set(true)
+            setTimeout(() => {
+              alertNotification.set(false)
+              alertMessage.set("")
+              alertType.set("")
+            }, 1000);
+        }
+    } 
+
     return (
         <div classname="tab-component-wrapper">
 
@@ -53,34 +149,31 @@ const UserPendingPackComponent  = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Pack ID</td>
-                        <td><b>15/20/2021</b></td>
+                    {pendingPacks.length > 0 && pendingPacks.map(data => (
+                        <tr>
+                            <td>{data.id}</td>
+                            <td><b>15/20/2021</b></td>
 
-                        <td>Omolola Daniel <br/> <b>email@gmail.com</b></td>
-                        <td>
-                            <b>Farm: </b>Cassava 2021 <br/>
-                            <small><b>CYCLE- </b> Rainy Season 2021</small><br/>
-
-                        </td>
-                        <td>
-                            <small className="text-white px-3 py-2 bg-dark"><b>QTY- </b>10</small>
-                            <small className="text-white px-3 py-2 bg-success2"><b>Price- </b>540,000</small>
-
-
-                        </td>
-
-                        <td className="d-flex align-items-center">
-                            <span className="d-flex align-items-center btn btn-success btn-sm pointer me-3">
-                                <FaCheckCircle className="me-2" />Accept
-                            </span>
-                            <span className="d-flex align-items-center btn btn-danger btn-sm pointer me-3">
-                                <FaTrashAlt className="me-2" />Decline
-                            </span>
-
-                        </td>
-
-                    </tr>
+                            <td>{data.buyer.name} <br/> <b>{data.buyer.email}</b></td>
+                            <td>
+                                <b>Farm: </b>{data.item.label} <br/>
+                                <small><b>CYCLE- </b> {data.item.cycle.label}</small><br/>
+                            </td>
+                            <td>
+                                <small className="text-white px-3 py-2 bg-dark"><b>QTY- </b>{data.quantity}</small>
+                                <small className="text-white px-3 py-2 bg-success2"><b>Price- </b>{data.capital}</small>
+                            </td>
+                            <td className="d-flex align-items-center">
+                                <span className="d-flex align-items-center btn btn-success btn-sm pointer me-3" onClick={() => onAccept(data.id)}>
+                                    <FaCheckCircle className="me-2" />Accept
+                                </span>
+                                <span className="d-flex align-items-center btn btn-danger btn-sm pointer me-3" onClick={() => onDecline(data.id)}>
+                                    <FaTrashAlt className="me-2" />Decline
+                                </span>
+                            </td>
+                        </tr>
+                    ))}
+                    
                     </tbody>
                 </table>
             </div>

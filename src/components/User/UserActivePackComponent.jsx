@@ -1,5 +1,5 @@
 import {Form, Row, Col, Tabs, Tab} from 'react-bootstrap';
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {
     Modal,
     ModalBody,
@@ -13,9 +13,34 @@ import {
     useDisclosure, Stack, Box
 } from "@chakra-ui/react";
 import UserReportComponent  from "./UserReportComponent";
+import {getActivePacks} from "../../apiServices/packServices";
 
-const UserActivePackComponent  = () => {
+const UserActivePackComponent  = ({id}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [activePacks, setActivePacks] = useState([])
+    const [currentUserPackReport, setCurrentUserPackReport] = useState({})
+    const [packID, setPackID] = useState(0)
+
+
+    useEffect(() => {
+        try{
+            const fetch = async () => {
+                const res = await getActivePacks(id)
+                setActivePacks(res.data.data)
+                console.log(res.data.data)
+            }
+            fetch()
+        }
+        catch(err){
+            console.log(err)
+        }
+    },[id])
+
+    const openModal = (data, id) => {
+        setCurrentUserPackReport(data)
+        setPackID(id)
+        onOpen()
+    }
     return (
         <div classname="tab-component-wrapper">
 
@@ -65,31 +90,33 @@ const UserActivePackComponent  = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Pack ID</td>
-                        <td><b>15/20/2021</b></td>
+                    {activePacks.map(data => (
+                        <tr>
+                            <td>{data.id}</td>
+                            <td><b>15/20/2021</b></td>
 
-                        <td>Omolola Daniel <br/> <b>email@gmail.com</b><br/> 08149423902</td>
-                        <td>
-                            <b>Farm: </b>Cassava 2021 <br/>
-                            <small><b>CYCLE- </b> Rainy Season 2021</small><br/>
-                            <small><b>Type- </b> Cassava</small><br/>
+                            <td>{data.buyer.name} <br/> <b>{data.buyer.email}</b><br/> {data.buyer.phone_number}</td>
+                            <td>
+                                <b>Farm: </b>{data.item.label} <br/>
+                                <small><b>CYCLE- </b> {data.item.cycle.label}</small><br/>
+                                <small><b>Type- </b> {data.item.type.name}</small><br/>
+                            </td>
+                            <td>
+                                <small className="text-white px-3 py-2 bg-dark"><b>QTY- </b>{data.quantity}</small>
+                                <small className="text-white px-3 py-2 bg-success2"><b>Price- </b>{data.capital}</small>
+                            </td>
 
-                        </td>
-                        <td>
-                            <small className="text-white px-3 py-2 bg-dark"><b>QTY- </b>10</small>
-                            <small className="text-white px-3 py-2 bg-success2"><b>Price- </b>540,000</small>
-                        </td>
+                            <td>
+                                <span className="text-success"><b> # {data.profit} : yeilding</b></span>
+                            </td>
+                            <td>
+                                <b>{data.report.title}</b> <br/>
+                                <span onClick={() => openModal(data.report, data.id)} className="text-decoration-underline pointer">View all</span>
+                            </td>
 
-                        <td>
-                            <span className="text-success"><b> # 0 : yeilding</b></span>
-                        </td>
-                        <td>
-                            <b>300</b> <br/>
-                            <span onClick={onOpen} className="text-decoration-underline pointer">View all</span>
-                        </td>
-
-                    </tr>
+                        </tr>
+                        ))
+                    }
                     </tbody>
                 </table>
             </div>
@@ -100,7 +127,10 @@ const UserActivePackComponent  = () => {
                     <ModalCloseButton className="btn-cls" />
                     <ModalBody className="pb-4 pt-3" >
                         <div>
-                            <UserReportComponent/>
+                            <UserReportComponent
+                                report = {currentUserPackReport}
+                                packID = {packID}
+                            />
                         </div>
                     </ModalBody>
                     <ModalFooter>

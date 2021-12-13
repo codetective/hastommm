@@ -4,14 +4,17 @@ import ActivePackComponent from '../components/Farm/ActivePackComponent';
 import {FaUserAlt} from "react-icons/fa";
 import React, {useEffect, useState} from "react";
 import {GiGroundSprout} from "react-icons/gi";
-import {getAllPacks} from '../apiServices/packServices';
+import {getAllPacks, getAllActivePacks, getAllPendingPacks} from '../apiServices/packServices';
 import ContentLoader from '../components/ContentLoader/ContentLoader';
 
 
 const Farms = () => {
+    const [packs, setPacks] = useState([])
     const [totalPacks, setTotalPacks] = useState(0)
-    const [activePacks, setActivePacks] = useState(0)
-    const [pendingPacks, setPendingPacks] = useState(0)
+    const [activePacks, setActivePacks] = useState([])
+    const [totalActivePacks, setTotalActivePacks] = useState(0)
+    const [pendingPacks, setPendingPacks] = useState([])
+    const [totalPendingPacks, setTotalPendingPacks] = useState(0)
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -20,12 +23,41 @@ const Farms = () => {
       setIsLoading(true)
       try{
         const res = await getAllPacks()
-        console.log(res)
+        setPacks(res.data.data)
+        setTotalPacks(res.data.meta.total)
       }
       catch(err){
         console.log(err)
       }
       setIsLoading(false)
+    }
+    fetch()
+  }, [])
+
+  useEffect(() => {
+    const fetch = async() => {
+      try{
+        const res = await getAllActivePacks()
+        setActivePacks(res.data.data)
+        setTotalActivePacks(res.data.meta.total)
+      }
+      catch(err){
+        console.log(err)
+      }
+    }
+    fetch()
+  }, [])
+
+  useEffect(() => {
+    const fetch = async() => {
+      try{
+        const res = await getAllPendingPacks()
+        setPendingPacks(res.data.data)
+        setTotalPendingPacks(res.data.meta.total)
+      }
+      catch(err){
+        console.log(err)
+      }
     }
     fetch()
   }, [])
@@ -55,7 +87,7 @@ const Farms = () => {
                     <div className="farm-card bg-success">
                         <div className="component">
                             <div className="component-header text-white"> Active Packs</div>
-                            <div className="component-qty text-white">{activePacks}</div>
+                            <div className="component-qty text-white">{totalActivePacks}</div>
                         </div>
 
                     </div>
@@ -63,7 +95,7 @@ const Farms = () => {
                     <div className="farm-card bg-danger">
                         <div className="component">
                             <div className="component-header text-white"> Pending Packs</div>
-                            <div className="component-qty text-white">{pendingPacks}</div>
+                            <div className="component-qty text-white">{totalPendingPacks}</div>
                         </div>
 
                     </div>
@@ -74,12 +106,16 @@ const Farms = () => {
             <div className="farm-tab-section">
                 <Tabs defaultActiveKey="pack" id="uncontrolled-tab-example" className="mb-3">
                     <Tab eventKey="pack" title="Active Packs">
-                        <ActivePackComponent/>
+                        <ActivePackComponent
+                            pack = {activePacks}
+                        />
 
                     </Tab>
 
                     <Tab eventKey="pending_pack" title="Pending Pack">
-                        <PendingPackComponent/>
+                        <PendingPackComponent
+                            pack = {pendingPacks}
+                        />
                     </Tab>
                 </Tabs>
 

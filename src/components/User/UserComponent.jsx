@@ -98,9 +98,7 @@ const UserComponent = () => {
                         <td><b> {data.name}</b> <br/> {data.email}</td>
                         <td><b>{data.phone_number ? data.phone_number : "-"}</b></td>
                         <td className="text-success"><b><b>{data.packs.length ? data.packs.length : "-"}</b></b></td>
-                        <td className="text-danger">
-                           -
-                        </td>
+                        <td className="text-danger"><b><b>{data.pending_packs.length ? data.pending_packs.length : "-"}</b></b></td>
                         <td><span onClick={() => viewUserDetail(data)} className="btn btn-dark btn-sm">View</span></td>
 
                     </tr>
@@ -139,7 +137,7 @@ const UserComponent = () => {
                                 <Stack>
                                     <StatsPanel
                                         totalprofit={userDetail.total_profit_gotten ? userDetail.total_profit_gotten : "0"}
-                                        totalpacks={userDetail.packs.length ? userDetail.packs.length : "0"}
+                                        totalpacks={userDetail.packs?.length > 0 ? userDetail.packs.length : "0"}
                                         totalcapital={userDetail.total_capital_invested ? userDetail.total_capital_invested : "0"}
                                         email={userDetail.email}
                                         location={userDetail.location}
@@ -153,12 +151,16 @@ const UserComponent = () => {
                             <div className="farm-tab-section">
                             <Tabs defaultActiveKey="pack" id="uncontrolled-tab-example" className="mb-3">
                                 <Tab eventKey="pack" title="Active Packs">
-                                    <UserActivePackComponent/>
+                                    <UserActivePackComponent
+                                        id={userDetail.id}
+                                    />
 
                                 </Tab>
 
                                 <Tab eventKey="pending_pack" title="Pending Pack">
-                                    <UserPendingPackComponent/>
+                                    <UserPendingPackComponent
+                                        id={userDetail.id}
+                                    />
                                 </Tab>
                             </Tabs>
                             </div>

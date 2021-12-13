@@ -14,7 +14,7 @@ import {generateReportForPack} from '../../apiServices/ReportServices';
 import {getCycle} from '../../apiServices/cycleServices';
 
 
-const UserReportComponent  = () => {
+const UserReportComponent  = ({packID, report}) => {
     const {alertNotification} = useState(store)
     const {alertType} = useState(store)
     const {alertMessage} = useState(store)
@@ -23,7 +23,7 @@ const UserReportComponent  = () => {
       title: "",
       description: "",
       link: "",
-      pack_id: ""
+      pack_id: packID
     }
 
     const validationSchema = Yup.object({
@@ -199,16 +199,12 @@ const UserReportComponent  = () => {
                     <tbody>
                     <tr>
                         <td><b>15/20/2021</b></td>
-                        <td>Fertilizer pack</td>
-                        <td>Monthly weed clearing and applying of yeast fertilizer using our sprays and mixing c4
-                            packages.
-                        </td>
-                        <td>Links</td>
+                        <td>{report.title}</td>
+                        <td>{report.description}</td>
+                        <td><a href={report.link}>Link</a></td>
                         <td className="">
                             <FaTrashAlt/>
                         </td>
-
-
                     </tr>
                     </tbody>
                 </table>
