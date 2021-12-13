@@ -8,13 +8,71 @@ import {
   Avatar,
   Stack,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import React from 'react';
 import {FaBars, FaChevronRight} from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
+import store from '../../store/store';
+import { useState } from '@hookstate/core';
+import {useHistory} from 'react-router-dom';
+import {logout} from '../../apiServices/authServices';
+import {Spinner} from 'react-bootstrap'
+
 
 const Header = ({ showSidebarButton = true, onShowSidebar }) => {
   const { pathname } = useLocation();
-  const [show, setShow] = useState(true);
+  const [show, setShow] = React.useState(true);
+  const [isLoggingOut, setIsLoggingOut] = React.useState(false);
+
+  let history = useHistory()
+
+  const {isAuth} = useState(store)
+  const {alertNotification} = useState(store)
+  const {alertType} = useState(store)
+  const {alertMessage} = useState(store)
+
+
+  const onLogout = async() => {
+    setIsLoggingOut(true)
+    try{
+      const res = await logout()
+      if(res.status === 200){
+        localStorage.removeItem("token")
+        isAuth.set(false)
+        alertMessage.set("Logout Successful")
+        alertType.set("success")
+        alertNotification.set(true)
+        setTimeout(() => {
+          alertNotification.set(false)
+          alertMessage.set("")
+          alertType.set("")
+        }, 1000);
+        history.push("/")
+      }
+      else{
+        alertMessage.set("Logout Failed")
+        alertType.set("danger")
+        alertNotification.set(true)
+        setTimeout(() => {
+          alertNotification.set(false)
+          alertMessage.set("")
+          alertType.set("")
+        }, 1000);
+      }
+    }
+    catch(err){
+      console.log(err)
+      alertMessage.set(err.message)
+        alertType.set("danger")
+        alertNotification.set(true)
+        setTimeout(() => {
+          alertNotification.set(false)
+          alertMessage.set("")
+          alertType.set("")
+        }, 1000);
+    }
+    setIsLoggingOut(false)
+  }
+
   return (
       <Flex
           bg="#fefefe"
@@ -100,8 +158,13 @@ const Header = ({ showSidebarButton = true, onShowSidebar }) => {
                 _hover={{ background: 'gray.100' }}
                 cursor="pointer"
                 textAlign="center"
+                onClick={onLogout}
             >
-              Logout
+              {isLoggingOut ?
+              <Spinner animation="border"  size="sm"/>
+              :
+              "Logout"
+              }
             </Box>
           </Stack>
         </Flex>
