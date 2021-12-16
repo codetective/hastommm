@@ -5,7 +5,7 @@ import {acceptPack, rejectPack ,deletePack} from "../../apiServices/packServices
 import { useState } from '@hookstate/core';
 import store from '../../store/store';
 
-const PendingPackComponent  = ({pack}) => {
+const DeclinedPackComponent  = ({pack}) => {
     const {alertNotification} = useState(store)
     const {alertType} = useState(store)
     const {alertMessage} = useState(store)
@@ -44,29 +44,28 @@ const PendingPackComponent  = ({pack}) => {
               alertType.set("")
             }, 1000);
         }
-    } 
-
-    const onDecline = async(id) => {
+    }
+    const onDelete = async(id) => {
         try{
-            const res = await rejectPack(id)
+            const res = await deletePack(id)
             if(res.status === 200 || res.status === 201){
-                alertMessage.set("Order Rejected")
+                alertMessage.set("Order deleted")
                 alertType.set("success")
                 alertNotification.set(true)
                 setTimeout(() => {
-                  alertNotification.set(false)
-                  alertMessage.set("")
-                  alertType.set("")
+                    alertNotification.set(false)
+                    alertMessage.set("")
+                    alertType.set("")
                 }, 1000);
             }
             else{
-                alertMessage.set("Failed to Reject Order")
+                alertMessage.set("Failed to Delete Order")
                 alertType.set("danger")
                 alertNotification.set(true)
                 setTimeout(() => {
-                  alertNotification.set(false)
-                  alertMessage.set("")
-                  alertType.set("")
+                    alertNotification.set(false)
+                    alertMessage.set("")
+                    alertType.set("")
                 }, 1000);
             }
         }
@@ -75,9 +74,9 @@ const PendingPackComponent  = ({pack}) => {
             alertType.set("danger")
             alertNotification.set(true)
             setTimeout(() => {
-              alertNotification.set(false)
-              alertMessage.set("")
-              alertType.set("")
+                alertNotification.set(false)
+                alertMessage.set("")
+                alertType.set("")
             }, 1000);
         }
     }
@@ -122,39 +121,46 @@ const PendingPackComponent  = ({pack}) => {
 
                         <th>Pack ID</th>
                         {/*<th>Date Ordered</th>*/}
-                        <th>Order Details</th>
                         <th>Ordered by</th>
+                        <th>Order Details</th>
+                        <th>Status</th>
                         <th>QTY / Price</th>
                         <th>Action</th>
 
 
                     </tr>
                     </thead>
-                    <tbody>
-                    {pack.map((data, index) => (
+
+                    {
+                        pack.map((data, index) => (data.status == 'cancelled' ?
+                            <tbody>
                         <tr>
-                        <td>{index + 1}</td>
+                            <td>{index + 1}</td>
+                            {/*<td><b>15/20/2021</b></td>*/}
+                            <td>{data.buyer.name} <br/> <b>{data.buyer.email}</b></td>
                             <td>
                                 <b>Farm: </b>{data.item.label} <br/>
                                 <small><b>CYCLE- </b> {data.item.cycle.label}</small><br/>
                             </td>
-                        <td>{data.buyer.name} <br/> <b>{data.buyer.email}</b></td>
+                            <td>
+                                <b className="text-danger">{data.status}</b>
+                            </td>
+                            <td className="">
+                                <small className="text-white px-3 py-2 bg-dark"><b>QTY- </b>{data.quantity}</small>
+                                <small className="text-white px-3 py-2 bg-success2"><b>#</b>{data.capital}</small>
+                            </td>
+                            <td>
+                                <span className="d-flex align-items-center btn btn-success btn-sm pointer me-3" onClick={() => onAccept(data.id)}>
+                                    <FaCheckCircle className="me-2" />Accept
+                                </span>
+                                <span className="d-flex mt-2 align-items-center btn btn-dark btn-sm pointer me-3" onClick={() => onDelete(data.id)}>
+                                    <FaTrashAlt className="me-2" /> Delete
+                                </span>
+                            </td>
+                        </tr> </tbody> : <tr className="d-none">none</tr>
+                        ))
+                    }
 
-                        <td>
-                            <small className="text-white px-3 py-2 bg-dark"><b>QTY- </b>{data.quantity}</small>
-                            <small className="text-white px-3 py-2 bg-success2"><b>Price- </b>{data.capital}</small>
-                        </td>
-                        <td className="d-flex align-items-center">
-                            <span className="d-flex align-items-center btn btn-success btn-sm pointer me-3" onClick={() => onAccept(data.id)}>
-                                <FaCheckCircle className="me-2" />Accept
-                            </span>
-                            <span className="d-flex align-items-center btn btn-danger btn-sm pointer me-3" onClick={() => onDecline(data.id)}>
-                                <FaStop className="me-2" />Decline
-                            </span>
-                        </td>
-                    </tr>
-                    ))}
-                    </tbody>
                 </table>
             </div>
 
@@ -162,4 +168,4 @@ const PendingPackComponent  = ({pack}) => {
     )
 }
 
-export default PendingPackComponent
+export default DeclinedPackComponent

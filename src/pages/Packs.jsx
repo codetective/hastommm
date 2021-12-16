@@ -6,6 +6,7 @@ import React, {useEffect, useState} from "react";
 import {GiGroundSprout} from "react-icons/gi";
 import {getAllPacks, getAllActivePacks, getAllPendingPacks} from '../apiServices/packServices';
 import ContentLoader from '../components/ContentLoader/ContentLoader';
+import DeclinedPackComponent from "../components/Farm/DeclinedPackComponent";
 
 
 const Farms = () => {
@@ -115,6 +116,11 @@ const Farms = () => {
                     <Tab eventKey="pending_pack" title="Pending Pack">
                         <PendingPackComponent
                             pack = {pendingPacks}
+                        />
+                    </Tab>
+                    <Tab eventKey="declined_pack" title="Declined Pack">
+                        <DeclinedPackComponent
+                            pack = {packs}
                         />
                     </Tab>
                 </Tabs>

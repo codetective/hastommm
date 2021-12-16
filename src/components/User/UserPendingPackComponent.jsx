@@ -1,14 +1,16 @@
-import {Form, Row, Col} from 'react-bootstrap';
+import {Form, Row, Col, Alert} from 'react-bootstrap';
 import {FaCheckCircle, FaTrashAlt} from "react-icons/fa";
 import React, {useEffect} from "react";
 import {getPendingPacks, acceptPack, rejectPack} from "../../apiServices/packServices";
 import { useState } from '@hookstate/core';
 import store from '../../store/store';
+import {useToast} from "@chakra-ui/react";
 
 
 
 const UserPendingPackComponent  = ({id}) => {
     const [pendingPacks, setPendingPacks] = React.useState([])
+    const toast = useToast();
 
 
     const {alertNotification} = useState(store)
@@ -40,6 +42,14 @@ const UserPendingPackComponent  = ({id}) => {
                   alertMessage.set("")
                   alertType.set("")
                 }, 1000);
+                return toast({
+                    title: 'Successfull.',
+                    description: 'Order Accepted Successfully',
+                    status: 'success',
+                    duration: 9000,
+                    isClosable: true,
+                    padding:"900"
+                });
             }
             else{
                 alertMessage.set("Failed to Accept Order")
@@ -102,6 +112,9 @@ const UserPendingPackComponent  = ({id}) => {
 
     return (
         <div classname="tab-component-wrapper">
+            <Alert show={alertNotification.get()} variant={alertType.get()}>
+                <p className="alert-p"> {alertMessage.get()} </p>
+            </Alert>
 
             <div className="mini-card  mb-4 rounded-2 w-100">
                 <div className="card-name">

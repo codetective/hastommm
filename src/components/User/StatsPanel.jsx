@@ -53,8 +53,9 @@ export default function StatsPanel({totalprofit, totalcapital, totalpacks, email
               <FaMapPin/>
               <Text as="small">{location}</Text>
             </HStack>
-
           </Stack>
+
+
         </SimpleGrid>
 
       </Container>

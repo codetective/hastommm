@@ -27,7 +27,7 @@ const Overview = () => {
       setIsLoading(true)
       try{
         const res = await getCycle()
-        setTotalCycles(res.data.data.length)
+        setTotalCycles(res.data.meta.total)
         setIsLoading(false)
       }
       catch(err){
@@ -43,7 +43,7 @@ const Overview = () => {
       setIsLoading(true)
       try{
         const res = await getFarm()
-        setTotalFarm(res.data.data.length)
+        setTotalFarm(res.data.meta.total)
         setIsLoading(false)
       }
       catch(err){
@@ -58,7 +58,7 @@ const Overview = () => {
     const fetch = async() => {
       try{
         const res = await getAllUsers()
-        setTotalUsers(res.data.data.length)
+        setTotalUsers(res.data.meta.total)
       }
       catch(err){
         console.log(err)

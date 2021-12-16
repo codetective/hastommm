@@ -114,7 +114,7 @@ const FarmComponent = ({data, setContentChanged, contentChanged}) => {
       description: editData.description,
       amount: editData.amount,
       max: editData.max,
-      cycle_id: editData.cycle_id,
+      cycle_id: editData.cycle && editData.cycle.id,
       item_type_id: editData.type && editData.type.id
     }
 
@@ -131,7 +131,7 @@ const FarmComponent = ({data, setContentChanged, contentChanged}) => {
         try{
           const res = await editFarm(editData.id, value)
           if(res.status === 200){
-            alertMessage.set("Farm Created")
+            alertMessage.set("Farm Edited Successfully")
             alertType.set("success")
             alertNotification.set(true)
             setContentChanged(contentChanged + 1)
@@ -139,10 +139,10 @@ const FarmComponent = ({data, setContentChanged, contentChanged}) => {
               alertNotification.set(false)
               alertMessage.set("")
               alertType.set("")
-            }, 1000);
+            }, 3000);
           }
           else{
-            alertMessage.set("Failed to Create Farm")
+            alertMessage.set("Failed to Edit Farm")
             alertType.set("danger")
             alertNotification.set(true)
             setTimeout(() => {
@@ -167,38 +167,38 @@ const FarmComponent = ({data, setContentChanged, contentChanged}) => {
     return (
 
         <div classname="tab-component-wrapper">
-            <div className="mini-card  mb-4 rounded-2 w-100">
-                <div className="card-name">
-                    Filter
-                </div>
-                <div className="card-form w-100">
-                    <Form className="w-100 ">
-                        <Row className="w-100">
-                            <Col className="my-2 col-md-6 col-lg-3 col-12">
-                                <select className="form-select form-select-sm" placeholder="Select">
-                                    <option selected>Select farm type</option>
-                                    {farmTypes.map(data => (
-                                    <option value={data.id} key={data.id}>{data.name}</option>
-                                    ))}
-                                </select>
-                            </Col>
-                            <Col  className="my-2 col-md-6 col-lg-3 col-12" >
-                                <input className="form-control form-control-sm" list="datalistOptions" id="exampleDataList"
-                                       placeholder="Cycle..."/>
-                                <datalist id="datalistOptions">
-                                    {cycles.map(data => (
-                                    <option value={data.label} key={data.id} />
-                                    ))}
-                                </datalist>
-                            </Col>
+            {/*<div className="mini-card  mb-4 rounded-2 w-100">*/}
+            {/*    <div className="card-name">*/}
+            {/*        Filter*/}
+            {/*    </div>*/}
+            {/*    <div className="card-form w-100">*/}
+            {/*        <Form className="w-100 ">*/}
+            {/*            <Row className="w-100">*/}
+            {/*                <Col className="my-2 col-md-6 col-lg-3 col-12">*/}
+            {/*                    <select className="form-select form-select-sm" placeholder="Select">*/}
+            {/*                        <option selected>Select farm type</option>*/}
+            {/*                        {farmTypes.map(data => (*/}
+            {/*                        <option value={data.id} key={data.id}>{data.name}</option>*/}
+            {/*                        ))}*/}
+            {/*                    </select>*/}
+            {/*//                 </Col>*/}
+            {/*//                 <Col  className="my-2 col-md-6 col-lg-3 col-12" >*/}
+            {/*                    <input className="form-control form-control-sm" list="datalistOptions" id="exampleDataList"*/}
+            {/*                           placeholder="Cycle..."/>*/}
+            {/*                    <datalist id="datalistOptions">*/}
+            {/*                        {cycles.map(data => (*/}
+            {/*                        <option value={data.label} key={data.id} />*/}
+            {/*                        ))}*/}
+            {/*                    </datalist>*/}
+            {/*                </Col>*/}
 
-                            <Col className="my-2">
-                                <button className="btn btn-add-outline">Apply</button>
-                            </Col>
-                        </Row>
-                    </Form>
-                </div>
-            </div>
+            {/*                <Col className="my-2">*/}
+            {/*                    <button className="btn btn-add-outline">Apply</button>*/}
+            {/*                </Col>*/}
+            {/*            </Row>*/}
+            {/*        </Form>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <div className="table-section w-100">
                 <table className="table tabx table-responsive over-h">
                     <thead>
@@ -288,7 +288,7 @@ const FarmComponent = ({data, setContentChanged, contentChanged}) => {
                             <div className="mb-3">
                                 <h3 className="mb-1" >Farm Type</h3>
                                 <Select 
-                                    placeholder="Farm Type"
+                                    placeholder="--Select Farm Type--"
                                     name="item_type_id"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
@@ -302,14 +302,15 @@ const FarmComponent = ({data, setContentChanged, contentChanged}) => {
                             </div>
                             <div className="mb-3">
                                 <h3 className="mb-1" >Cycle</h3>
-                                <Select 
-                                    placeholder="Cycle"
+                                <Select
+                                    placeholder="--Select Cycle--"
                                     name="cycle_id"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.cycle_id}
                                 >
                                     {cycles.map(data => (
+
                                     <option value={data.id} key={data.id}>{data.label}</option>
                                     ))}
                                 </Select>

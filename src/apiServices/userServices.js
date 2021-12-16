@@ -7,3 +7,7 @@ export const profile = () => {
 export const getAllUsers = () => {
     return http.get("/super-admin/users/list/all")
 }
+
+export const getAllUsersBasic = () => {
+    return http.get("/super-admin/users/list/all?role_is_basic=true")
+}

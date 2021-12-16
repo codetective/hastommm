@@ -11,3 +11,8 @@ export const generateReportForCycle = (data) => {
 export const getAllReports = () => {
     return http.get("/admin/report/list")
 }
+
+
+export const editReport = (id, data) => {
+    return http.put(`/admin/report/edit/${id}`, data)
+}

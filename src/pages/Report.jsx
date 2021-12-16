@@ -51,7 +51,7 @@ export default function Cycle() {
         const fetch = async() => {
             try{
                 const res = await getAllReports()
-                setTotalReports(res.data.data.length)
+                setTotalReports(res.data.meta.total)
                 setGeneralReports(res.data.data)
             }
             catch(err){
@@ -137,14 +137,14 @@ export default function Cycle() {
             </div>
             <div className="farm-tab-section mt-4">
                 <Tabs defaultActiveKey="reports" id="uncontrolled-tab-example" className="mb-3">
-                    <Tab eventKey="reports" title="General Records">
+                    <Tab eventKey="reports" title="All Reports">
                         <ReportComponent 
                             report={generalReports}
                         />
                     </Tab>
-                    <Tab eventKey="reports2" title="Targeted Reports">
-                        <Report2Component />
-                    </Tab>
+                    {/*<Tab eventKey="reports2" title="Targeted Reports">*/}
+                    {/*    <Report2Component />*/}
+                    {/*</Tab>*/}
                 </Tabs>
             </div>
 
@@ -190,16 +190,14 @@ export default function Cycle() {
                             <div className="mb-4">
                                 <h3 className="mb-1" >Cycle</h3>
                                 <Select 
-                                    placeholder="Select Cycle to send report" 
+                                    placeholder="--Select Cycle to send report--"
                                     name="cycle_id"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.cycle_id}
                                 >
-                                    <option value="">Select Cycle</option>
                                     {cycles.map(data => (
                                         <option value={data.id} key={data.id}>{data.label}</option>
-
                                     ))}
                                 </Select>
                                 <small className="text-danger">{errors.cycle_id && touched.cycle_id && errors.cycle_id}</small>

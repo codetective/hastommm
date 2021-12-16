@@ -15,7 +15,6 @@ export const getPendingPacks = (id) => {
 export const acceptPack = (id) => {
     return http.put(`/admin/packs/accept/${id}`)
 }
-
 export const rejectPack = (id) => {
     return http.put(`/admin/packs/decline/${id}`)
 }
@@ -34,4 +33,7 @@ export const getAllPendingPacks = () => {
 
 export const updatePack = (id) => {
     return http.put(`/order/fufil-order/${id}`)
+}
+export const deletePack = (id) => {
+    return http.delete(`/order/delete/${id}`)
 }

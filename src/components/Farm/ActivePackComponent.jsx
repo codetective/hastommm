@@ -1,9 +1,51 @@
 import {Form, Row, Col} from 'react-bootstrap';
 import React from "react";
+import {FaTrashAlt} from "react-icons/fa";
+import {deletePack} from "../../apiServices/packServices";
+import {useState} from "@hookstate/core";
+import store from "../../store/store";
 
 
 
 const ActivePackComponent  = ({pack}) => {
+    const {alertNotification} = useState(store)
+    const {alertType} = useState(store)
+    const {alertMessage} = useState(store)
+    const onDelete = async(id) => {
+        try{
+            const res = await deletePack(id)
+            if(res.status === 200 || res.status === 201){
+                alertMessage.set("Order deleted")
+                alertType.set("success")
+                alertNotification.set(true)
+                setTimeout(() => {
+                    alertNotification.set(false)
+                    alertMessage.set("")
+                    alertType.set("")
+                }, 1000);
+            }
+            else{
+                alertMessage.set("Failed to Delete Order")
+                alertType.set("danger")
+                alertNotification.set(true)
+                setTimeout(() => {
+                    alertNotification.set(false)
+                    alertMessage.set("")
+                    alertType.set("")
+                }, 1000);
+            }
+        }
+        catch(err){
+            alertMessage.set(err.message)
+            alertType.set("danger")
+            alertNotification.set(true)
+            setTimeout(() => {
+                alertNotification.set(false)
+                alertMessage.set("")
+                alertType.set("")
+            }, 1000);
+        }
+    }
 
     return (
         <div classname="tab-component-wrapper">
@@ -45,25 +87,28 @@ const ActivePackComponent  = ({pack}) => {
 
                         <th>Pack ID</th>
                         <th>Date Ordered</th>
-                        <th>Ordered by</th>
                         <th>Order Details</th>
+                        <th>Ordered by</th>
+
                         <th>QTY / Price</th>
                         <th>Profit</th>
+                        <th>Action</th>
 
                     </tr>
                     </thead>
                     <tbody>
-                    {pack.map(data => (
+                    {pack.map((data, index)=> (
                     <tr>
-                        <td>{data.id}</td>
-                        <td><b>15/20/2021</b></td>
+                        <td>{index + 1}</td>
+                        <td><b>{data.date_created }</b></td>
 
-                        <td>{data.buyer.name} <br/> <b>{data.buyer.email}</b><br/> {data.buyer.phone_number}</td>
+
                         <td>
                             <b>Farm: </b>{data.item.label} <br/>
                             <small><b>CYCLE- </b> {data.item.cycle.label}</small><br/>
                             <small><b>Type- </b> {data.item.type.name}</small><br/>
                         </td>
+                        <td>{data.buyer.name} <br/> <b>{data.buyer.email}</b><br/> {data.buyer.phone_number}</td>
                         <td>
                             <small className="text-white px-3 py-2 bg-dark"><b>QTY- </b>{data.quantity}</small>
                             <small className="text-white px-3 py-2 bg-success2"><b>Price- </b>{data.capital}</small>
@@ -71,6 +116,11 @@ const ActivePackComponent  = ({pack}) => {
 
                         <td>
                             <span className="text-success"><b> # {data.profit} : yeilding</b></span>
+                        </td>
+                        <td>
+                            <span className="d-flex align-items-center btn btn-dark btn-sm pointer me-3" onClick={() => onDelete(data.id)}>
+                                <FaTrashAlt/>
+                            </span>
                         </td>
                     </tr>
                     ))}

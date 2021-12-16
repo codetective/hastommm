@@ -27,6 +27,7 @@ import {Spinner, Alert} from 'react-bootstrap';
 const Farms = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [farms, setFarms] = React.useState([])
+    const [farmsTotal, setFarmsTotal] = React.useState([])
     const [farmTypes, setFarmTypes] = React.useState([])
     const [cycles, setCycles] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
@@ -38,6 +39,7 @@ const Farms = () => {
             try{
                 const res = await getFarm()
                 setFarms(res.data.data)
+                setFarmsTotal(res.data.meta.total)
                 setIsLoading(false)
             }
             catch(err){
@@ -148,7 +150,7 @@ const Farms = () => {
                     <div className="farm-card bg-success2">
                         <div className="component">
                             <div className="component-header text-white"> Total Farms </div>
-                            <div className="component-qty text-white">{farms.length}</div>
+                            <div className="component-qty text-white">{farmsTotal}</div>
                         </div>
 
                     </div>
@@ -218,13 +220,14 @@ const Farms = () => {
                             <Divider my="35px" h="0.5px !important" opacity="0.2" />
                             <div className="mb-3">
                                 <h3 className="mb-1" >Farm Type</h3>
-                                <Select 
+                                <Select
                                     placeholder="Farm Type"
                                     name="item_type_id"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.item_type_id}
                                 >
+
                                     {farmTypes.map(data => (
                                         <option value={data.id} key={data.id}>{data.name}</option>
                                     ))}
@@ -233,7 +236,7 @@ const Farms = () => {
                             </div>
                             <div className="mb-3">
                                 <h3 className="mb-1" >Cycle</h3>
-                                <Select 
+                                <Select
                                     placeholder="Cycle"
                                     name="cycle_id"
                                     onChange={handleChange}

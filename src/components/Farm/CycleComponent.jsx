@@ -46,7 +46,6 @@ const CycleComponent = ({data, contentChanged, setContentChanged}) => {
       description: Yup.string().required("Description is required"),
       start_date: Yup.string().required("Start Date is required"),
       end_date: Yup.string().required("End Date is required"),
-
     })
 
     const deleteCycleObject = async (id) => {
@@ -129,35 +128,34 @@ const CycleComponent = ({data, contentChanged, setContentChanged}) => {
     return (
         <div classname="tab-component-wrapper">
 
-            <div className="mini-card  mb-4 rounded-2 w-100">
-                <div className="card-name">
-                    Filter
-                </div>
-                <div className="card-form w-100">
-                    <Form className="w-100 ">
-                        <Row className="w-100">
-                            <Col className="my-2 col-md-6 col-lg-3 col-12">
-                                <input className="form-control form-control-sm" list="datalistOptions" id="exampleDataList"
-                                       placeholder="Cycle..."/>
-                                <datalist id="datalistOptions">
-                                    <option value="Rainy Season 2021"/>
-                                    <option value="Rainy Season 2022"/>
+            {/*<div className="mini-card  mb-4 rounded-2 w-100">*/}
+            {/*    <div className="card-name">*/}
+            {/*        Filter*/}
+            {/*    </div>*/}
+            {/*    <div className="card-form w-100">*/}
+            {/*        <Form className="w-100 ">*/}
+            {/*            <Row className="w-100">*/}
+            {/*                <Col className="my-2 col-md-6 col-lg-3 col-12">*/}
+            {/*                    <input className="form-control form-control-sm" list="datalistOptions" id="exampleDataList"*/}
+            {/*                           placeholder="Cycle..."/>*/}
+            {/*                    <datalist id="datalistOptions">*/}
+            {/*//                         <option value="Rainy Season 2021"/>*/}
+            {/*//                         <option value="Rainy Season 2022"/>*/}
+            {/*                    </datalist>*/}
+            {/*                </Col>*/}
 
-                                </datalist>
-                            </Col>
-
-                            <Col  className="my-2 col-md-6 col-lg-4 col-12">
-                                <Form.Control placeholder="Select Start Date" id="date2" size="sm" type="text" onFocus={(e) => {
-                                    document.getElementById("date2").type='date';
-                                }}/>
-                            </Col>
-                            <Col className="my-2">
-                                <button className="btn btn-add-outline">Apply</button>
-                            </Col>
-                        </Row>
-                    </Form>
-                </div>
-            </div>
+            {/*                <Col  className="my-2 col-md-6 col-lg-4 col-12">*/}
+            {/*                    <Form.Control placeholder="Select Start Date" id="date2" size="sm" type="text" onFocus={(e) => {*/}
+            {/*//                         document.getElementById("date2").type='date';*/}
+            {/*//                     }}/>*/}
+            {/*                </Col>*/}
+            {/*                <Col className="my-2">*/}
+            {/*                    <button className="btn btn-add-outline">Apply</button>*/}
+            {/*                </Col>*/}
+            {/*            </Row>*/}
+            {/*        </Form>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
 
             <div className="table-section w-100">

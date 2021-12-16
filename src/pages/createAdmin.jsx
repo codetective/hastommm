@@ -12,23 +12,58 @@ import {
 } from "@chakra-ui/react"
 import AdminComponent from '../components/CreateAdmin/adminComponent';
 import {FaUserShield, FaUserSlash} from "react-icons/fa";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Alert, Spinner} from "react-bootstrap";
 import {Formik} from "formik";
 import * as Yup from 'yup';
 import store from '../store/store';
-import { useState } from '@hookstate/core';
-import {createAdmin} from '../apiServices/authServices';
+import {createAdmin, getAllAdmin, getAllUsersSuperAdmin} from '../apiServices/authServices';
+import ContentLoader from "../components/ContentLoader/ContentLoader";
 
 
 
 export default function CreateAdmin() {
+    const [totalAdmin, setTotalAdmin] = useState(0);
+    const [totalSuperAdmin, setTotalSuperAdmin] = useState(0);
+    const [isLoading, setIsLoading] = useState(true)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [passwordError, setPasswordError] = React.useState("")
+    const [contentChanged, setContentChanged] = React.useState(0)
 
     const {alertNotification} = useState(store)
     const {alertType} = useState(store)
     const {alertMessage} = useState(store)
+
+    useEffect(() => {
+        setIsLoading(true)
+        const fetch = async() => {
+            try{
+                const res = await getAllAdmin()
+                setTotalAdmin(res.data.data.length)
+            }
+            catch(err){
+                console.log(err)
+            }
+            setIsLoading(false)
+        }
+        fetch()
+    }, [])
+    useEffect(() => {
+        setIsLoading(true)
+        const fetch = async() => {
+            try{
+                const res = await getAllUsersSuperAdmin()
+                setTotalSuperAdmin(res.data.data.length)
+            }
+            catch(err){
+                console.log(err)
+            }
+            setIsLoading(false)
+        }
+        fetch()
+    }, [])
+
+
 
     const initialValues = {
       name: "",
@@ -90,7 +125,12 @@ export default function CreateAdmin() {
             }, 1000);
         }
       }
+
+
     return (
+        isLoading ?
+            <ContentLoader />
+            :
         <Box pb="50px">
 
             <div className="d-flex flex-wrap align-items-center justify-content-between flex-wrap">
@@ -100,7 +140,7 @@ export default function CreateAdmin() {
                         <FaUserShield className="me-3 fs-1 text-white"/>
                         <div>
                             <div className="component-header text-white fw-bold"> Admins </div>
-                            <div className="fw-normal fs-5 text-white">3</div>
+                            <div className="fw-normal fs-5 text-white">{totalAdmin + totalSuperAdmin}</div>
                         </div>
 
                     </div>
@@ -110,7 +150,7 @@ export default function CreateAdmin() {
                 <div onClick={onOpen} className="btn btn-dark px-3">Create Admin</div>
 
             </div>
-            <AdminComponent />
+            <AdminComponent contentChanged={contentChanged} setContentChanged={setContentChanged} />
 
             <Modal  isOpen={isOpen} onClose={onClose} size={"xl"}>
                 <ModalOverlay />

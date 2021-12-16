@@ -22,8 +22,8 @@ import React, {useState, useEffect} from "react";
 import src from '../../assets/farm.jpg';
 import UserActivePackComponent from "../User/UserActivePackComponent";
 import UserPendingPackComponent from "../User/UserPendingPackComponent";
-import {FaBackspace} from "react-icons/all";
-import { getAllUsers } from '../../apiServices/userServices';
+import {FaBackspace, FaPhone, FaPhoneSquareAlt} from "react-icons/all";
+import {getAllUsers, getAllUsersBasic} from '../../apiServices/userServices';
 
 const UserComponent = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -83,28 +83,33 @@ const UserComponent = () => {
                     <tr>
                         <th>S/N</th>
                         <th>User</th>
-                        <th>Phone</th>
-                        <th>Total Packs</th>
-                        <th>Pending Packs</th>
+                        <th>Total Farm</th>
+                        <th>Pending Farm</th>
                         <th>Action</th>
 
 
                     </tr>
                     </thead>
-                    <tbody>
                     {user.map((data, index) => (
+                    <tbody>
+                    {data.roles.length > 0 ?<tbody></tbody>:
                     <tr key={data.id}>
+
                         <td><b>{index + 1}</b></td>
-                        <td><b> {data.name}</b> <br/> {data.email}</td>
-                        <td><b>{data.phone_number ? data.phone_number : "-"}</b></td>
-                        <td className="text-success"><b><b>{data.packs.length ? data.packs.length : "-"}</b></b></td>
-                        <td className="text-danger"><b><b>{data.pending_packs.length ? data.pending_packs.length : "-"}</b></b></td>
+                        <td><b> {data.name}</b> <br/> {data.email} <br/>
+                            <span className="small d-flex align-items-center text-primary"><FaPhoneSquareAlt className="me-1"/>{data.phone_number ? data.phone_number : "No Number"}</span></td>
+                        <td className="text-success"><b><b>{data.packs.length ? data.packs.length : "0"}</b></b></td>
+                        <td className="text-danger">
+                            <b>
+                                {data.pending_packs.length ? data.pending_packs.length : "-"}
+                                {/*{data.active_packs.length ? data.active_packs.length : "-"}*/}
+                            </b>
+                        </td>
                         <td><span onClick={() => viewUserDetail(data)} className="btn btn-dark btn-sm">View</span></td>
 
-                    </tr>
-                    ))}
-
+                    </tr>}
                     </tbody>
+                    ))}
                 </table>
             </div>
 
