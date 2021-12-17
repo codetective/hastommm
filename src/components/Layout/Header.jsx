@@ -87,7 +87,6 @@ const Header = ({ showSidebarButton = true, onShowSidebar }) => {
         <Box flex="" border="none !important"  px='0'>
           {showSidebarButton && (
               <IconButton
-
                   icon={<FaBars w={8} h={8} />}
                   colorScheme="blackAlpha"
                   variant="outline"
