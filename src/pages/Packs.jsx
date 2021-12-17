@@ -16,6 +16,7 @@ const Farms = () => {
     const [totalActivePacks, setTotalActivePacks] = useState(0)
     const [pendingPacks, setPendingPacks] = useState([])
     const [totalPendingPacks, setTotalPendingPacks] = useState(0)
+    const [contentChanged, setContentChanged] = React.useState(0)
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -33,7 +34,7 @@ const Farms = () => {
       setIsLoading(false)
     }
     fetch()
-  }, [])
+  }, [contentChanged])
 
   useEffect(() => {
     const fetch = async() => {
@@ -47,7 +48,7 @@ const Farms = () => {
       }
     }
     fetch()
-  }, [])
+  }, [contentChanged])
 
   useEffect(() => {
     const fetch = async() => {
@@ -61,7 +62,7 @@ const Farms = () => {
       }
     }
     fetch()
-  }, [])
+  }, [contentChanged])
 
     return (
         isLoading ?
@@ -109,6 +110,7 @@ const Farms = () => {
                     <Tab eventKey="pack" title="Active Packs">
                         <ActivePackComponent
                             pack = {activePacks}
+                            contentChanged={contentChanged} setContentChanged={setContentChanged}
                         />
 
                     </Tab>
@@ -116,11 +118,13 @@ const Farms = () => {
                     <Tab eventKey="pending_pack" title="Pending Pack">
                         <PendingPackComponent
                             pack = {pendingPacks}
+                            contentChanged={contentChanged} setContentChanged={setContentChanged}
                         />
                     </Tab>
                     <Tab eventKey="declined_pack" title="Declined Pack">
                         <DeclinedPackComponent
                             pack = {packs}
+                            contentChanged={contentChanged} setContentChanged={setContentChanged}
                         />
                     </Tab>
                 </Tabs>

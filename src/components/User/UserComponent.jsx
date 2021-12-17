@@ -92,7 +92,7 @@ const UserComponent = () => {
                     </thead>
                     {user.map((data, index) => (
                     <tbody>
-                    {data.roles.length > 0 ?<tbody></tbody>:
+                    {data.roles.length === 0 ?<tbody></tbody>:
                     <tr key={data.id}>
 
                         <td><b>{index + 1}</b></td>

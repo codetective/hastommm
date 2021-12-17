@@ -19,8 +19,8 @@ import {
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {getCycle} from "../../apiServices/cycleServices";
-import {editReport} from "../../apiServices/ReportServices";
-const ReportComponent = ({report}) => {
+import {editReport, deleteReport} from "../../apiServices/ReportServices";
+const ReportComponent = ({report, contentChanged, setContentChanged}) => {
 
     const {alertNotification} = useState(store)
     const {alertType} = useState(store)
@@ -68,6 +68,7 @@ const ReportComponent = ({report}) => {
                 alertMessage.set(" Successfully")
                 alertType.set("success")
                 alertNotification.set(true)
+                setContentChanged(contentChanged + 1)
                 setTimeout(() => {
                     alertNotification.set(false)
                     alertMessage.set("")
@@ -76,6 +77,44 @@ const ReportComponent = ({report}) => {
             }
             else{
                 alertMessage.set("Failed ")
+                alertType.set("danger")
+                alertNotification.set(true)
+                setTimeout(() => {
+                    alertNotification.set(false)
+                    alertMessage.set("")
+                    alertType.set("")
+                }, 1000);
+            }
+        }
+        catch(err){
+            console.log(err)
+            alertMessage.set("An Error Occured")
+            alertType.set("danger")
+            alertNotification.set(true)
+            setTimeout(() => {
+                alertNotification.set(false)
+                alertMessage.set("")
+                alertType.set("")
+            }, 1000);
+        }
+    }
+
+    const deleteOneReport = async (id) => {
+        try{
+            const res = await deleteReport(id)
+            if(res.status === 200){
+                alertMessage.set("Deleted")
+                alertType.set("success")
+                alertNotification.set(true)
+                setContentChanged(contentChanged - 1)
+                setTimeout(() => {
+                    alertNotification.set(false)
+                    alertMessage.set("")
+                    alertType.set("")
+                }, 1000);
+            }
+            else{
+                alertMessage.set("Failed to Delete")
                 alertType.set("danger")
                 alertNotification.set(true)
                 setTimeout(() => {
@@ -137,7 +176,7 @@ const ReportComponent = ({report}) => {
                 <table className="table tabx table-responsive over-h">
                     <thead>
                     <tr>
-                        <th>Date</th>
+                        <th>Report ID</th>
                         <th>Report</th>
                         <th>Activity</th>
                         <th>Action</th>
@@ -148,12 +187,14 @@ const ReportComponent = ({report}) => {
                     <tbody>
                     {report.map(data => (
                         <tr key={data.id}>
-                            <td><b>15/20/2021</b></td>
+                            <td><b>
+                               RPO {data.id}T
+                            </b></td>
                             <td>{data.title}</td>
                             <td>{data.description}</td>
                             <td className="d-flex align-items-center">
                                 <span className="text-decoration-underline pointer me-3" onClick={() => viewFarm(data)}>View</span>
-                                <FaTrashAlt className="pointer"/>
+                                <FaTrashAlt className="pointer"  onClick={() => deleteOneReport(data.id)}/>
                             </td>
                         </tr>
                     ))}

@@ -7,7 +7,7 @@ import store from "../../store/store";
 
 
 
-const ActivePackComponent  = ({pack}) => {
+const ActivePackComponent  = ({pack,contentChanged, setContentChanged}) => {
     const {alertNotification} = useState(store)
     const {alertType} = useState(store)
     const {alertMessage} = useState(store)
@@ -18,6 +18,7 @@ const ActivePackComponent  = ({pack}) => {
                 alertMessage.set("Order deleted")
                 alertType.set("success")
                 alertNotification.set(true)
+                setContentChanged(contentChanged - 1)
                 setTimeout(() => {
                     alertNotification.set(false)
                     alertMessage.set("")
@@ -100,7 +101,14 @@ const ActivePackComponent  = ({pack}) => {
                     {pack.map((data, index)=> (
                     <tr>
                         <td>{index + 1}</td>
-                        <td><b>{data.date_created }</b></td>
+                        <td><b>
+                            { new Date(data.date_created).toLocaleDateString([],
+                                {
+                                    year: "numeric",
+                                    month: "numeric",
+                                    day: "numeric",
+                                })}
+                        </b></td>
 
 
                         <td>

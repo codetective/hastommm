@@ -5,7 +5,7 @@ import {acceptPack, rejectPack ,deletePack} from "../../apiServices/packServices
 import { useState } from '@hookstate/core';
 import store from '../../store/store';
 
-const DeclinedPackComponent  = ({pack}) => {
+const DeclinedPackComponent  = ({pack,contentChanged, setContentChanged}) => {
     const {alertNotification} = useState(store)
     const {alertType} = useState(store)
     const {alertMessage} = useState(store)
@@ -17,6 +17,7 @@ const DeclinedPackComponent  = ({pack}) => {
                 alertMessage.set("Order Accepted")
                 alertType.set("success")
                 alertNotification.set(true)
+                setContentChanged(contentChanged + 1)
                 setTimeout(() => {
                   alertNotification.set(false)
                   alertMessage.set("")
@@ -52,6 +53,7 @@ const DeclinedPackComponent  = ({pack}) => {
                 alertMessage.set("Order deleted")
                 alertType.set("success")
                 alertNotification.set(true)
+                setContentChanged(contentChanged - 1)
                 setTimeout(() => {
                     alertNotification.set(false)
                     alertMessage.set("")

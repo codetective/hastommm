@@ -16,3 +16,7 @@ export const getAllReports = () => {
 export const editReport = (id, data) => {
     return http.put(`/admin/report/edit/${id}`, data)
 }
+
+export const deleteReport = (id) => {
+    return http.delete(`/admin/report/delete/${id}`)
+}

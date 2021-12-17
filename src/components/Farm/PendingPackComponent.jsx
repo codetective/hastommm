@@ -5,7 +5,7 @@ import {acceptPack, rejectPack ,deletePack} from "../../apiServices/packServices
 import { useState } from '@hookstate/core';
 import store from '../../store/store';
 
-const PendingPackComponent  = ({pack}) => {
+const PendingPackComponent  = ({pack,contentChanged, setContentChanged}) => {
     const {alertNotification} = useState(store)
     const {alertType} = useState(store)
     const {alertMessage} = useState(store)
@@ -17,6 +17,7 @@ const PendingPackComponent  = ({pack}) => {
                 alertMessage.set("Order Accepted")
                 alertType.set("success")
                 alertNotification.set(true)
+                setContentChanged(contentChanged + 1)
                 setTimeout(() => {
                   alertNotification.set(false)
                   alertMessage.set("")
@@ -53,6 +54,8 @@ const PendingPackComponent  = ({pack}) => {
                 alertMessage.set("Order Rejected")
                 alertType.set("success")
                 alertNotification.set(true)
+                setContentChanged(contentChanged - 1)
+
                 setTimeout(() => {
                   alertNotification.set(false)
                   alertMessage.set("")

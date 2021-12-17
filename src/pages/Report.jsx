@@ -31,6 +31,7 @@ export default function Cycle() {
     const [cycles, setCycles] = React.useState([])
     const [totalReports, setTotalReports] = React.useState(0)
     const [generalReports, setGeneralReports] = React.useState([])
+    const [contentChanged, setContentChanged] = React.useState(0)
 
 
 
@@ -59,7 +60,7 @@ export default function Cycle() {
             }
         }
         fetch()
-    }, [])
+    }, [contentChanged])
 
     const {alertNotification} = useState(store)
     const {alertType} = useState(store)
@@ -85,6 +86,7 @@ export default function Cycle() {
           if(res.status === 200){
             alertMessage.set("Report Generated")
             alertType.set("success")
+              setContentChanged(contentChanged + 1)
             alertNotification.set(true)
             setTimeout(() => {
               alertNotification.set(false)
@@ -139,7 +141,7 @@ export default function Cycle() {
                 <Tabs defaultActiveKey="reports" id="uncontrolled-tab-example" className="mb-3">
                     <Tab eventKey="reports" title="All Reports">
                         <ReportComponent 
-                            report={generalReports}
+                            report={generalReports} contentChanged={contentChanged} setContentChanged={setContentChanged}
                         />
                     </Tab>
                     {/*<Tab eventKey="reports2" title="Targeted Reports">*/}
