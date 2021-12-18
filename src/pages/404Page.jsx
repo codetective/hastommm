@@ -4,7 +4,7 @@ import React from 'react';
 export default function NotFoundPage() {
   return (
     <Center minHeight="70vh" pos="relative" py="80px">
-      <Stack p="8" shadow="lg" rounded="20px" bg="white">
+      <Stack p="8" shadow="sm" rounded="0px" bg="gray.50">
         <Center flexDir="column">
           <Text
             className="afont"
