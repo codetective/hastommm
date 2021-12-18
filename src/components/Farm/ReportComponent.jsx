@@ -33,6 +33,7 @@ const ReportComponent = ({report, contentChanged, setContentChanged}) => {
         setEditData(item)
         onOpen()
     }
+
     useEffect(() => {
         const fetch = async() => {
             try{

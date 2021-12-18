@@ -4,8 +4,15 @@ export const profile = () => {
     return http.get("/profile")
 }
 
-export const getAllUsers = () => {
+export const getAllUsers = (page) => {
+    if (page) {
+        return http.get(`/super-admin/users/list/all?page=${page}`)
+    }
     return http.get("/super-admin/users/list/all")
+}
+
+export const searchUser = (keyword) => {
+    return http.get(`/super-admin/users/list/all?keyword=${keyword}`)
 }
 
 export const getAllUsersBasic = () => {

@@ -363,3 +363,16 @@
     .type-card {
         width: 100%
     } */
+    .page-link:hover{
+        color: green !important;
+    }
+
+    .page-link{
+        color: green !important;
+    }
+
+    .page-item.active .page-link{
+        color: #FFFFFF !important;
+        background-color: green !important;
+        border-color: green !important;
+    }

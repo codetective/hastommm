@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react"
 import {FaFileAlt,} from 'react-icons/fa';
 import PageTitle from '../components/Global/PageTitle';
-import {Tab, Tabs} from "react-bootstrap";
+import {Tab, Tabs, Pagination} from "react-bootstrap";
 import React, {useEffect} from "react";
 import ReportComponent from "../components/Farm/ReportComponent";
 import Report2Component from "../components/Farm/Report2Component";
@@ -33,8 +33,23 @@ export default function Cycle() {
     const [generalReports, setGeneralReports] = React.useState([])
     const [contentChanged, setContentChanged] = React.useState(0)
 
+    const [page, setPage] = React.useState(1)
+    const [currentPage, setCurrentPage] = React.useState(0)
+    const [totalPages, setTotalPages] = React.useState(0)
 
+    function goToNextPage() {
+        if(page < totalPages){
+            setPage(page + 1)
+        }
+     }
+   
+    function goToPreviousPage() {
+        if(page > 1){
+            setPage(page - 1)
+        }
+     }
 
+    
     useEffect(() => {
         const fetch = async() => {
             try{
@@ -51,16 +66,18 @@ export default function Cycle() {
     useEffect(() => {
         const fetch = async() => {
             try{
-                const res = await getAllReports()
+                const res = await getAllReports(page)
                 setTotalReports(res.data.meta.total)
                 setGeneralReports(res.data.data)
+                setTotalPages(res.data.meta.last_page)
+                setCurrentPage(res.data.meta.current_page)
             }
             catch(err){
                 console.log(err)
             }
         }
         fetch()
-    }, [contentChanged])
+    }, [page, contentChanged])
 
     const {alertNotification} = useState(store)
     const {alertType} = useState(store)
@@ -148,6 +165,11 @@ export default function Cycle() {
                     {/*    <Report2Component />*/}
                     {/*</Tab>*/}
                 </Tabs>
+                <Pagination>
+                {page > 1 && <Pagination.Prev onClick={goToPreviousPage}/> }
+                    <Pagination.Item active>{currentPage}</Pagination.Item>
+                {page !== totalPages && <Pagination.Next onClick={goToNextPage}/> }
+                </Pagination>
             </div>
 
             <Modal  isOpen={isOpen} onClose={onClose} size={"xl"}>

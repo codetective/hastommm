@@ -5,6 +5,7 @@ import {getPendingPacks, acceptPack, rejectPack} from "../../apiServices/packSer
 import { useState } from '@hookstate/core';
 import store from '../../store/store';
 import {useToast} from "@chakra-ui/react";
+import {dateConverter} from "../../utils/Functions";
 
 
 
@@ -165,7 +166,7 @@ const UserPendingPackComponent  = ({id}) => {
                     {pendingPacks.length > 0 && pendingPacks.map(data => (
                         <tr>
                             <td>{data.id}</td>
-                            <td><b>15/20/2021</b></td>
+                            <td><b>{dateConverter(data.date_created)}</b></td>
 
                             <td>{data.buyer.name} <br/> <b>{data.buyer.email}</b></td>
                             <td>

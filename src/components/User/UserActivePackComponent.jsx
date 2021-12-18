@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import UserReportComponent  from "./UserReportComponent";
 import {getActivePacks} from "../../apiServices/packServices";
+import {dateConverter} from "../../utils/Functions";
 
 const UserActivePackComponent  = ({id}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -93,7 +94,7 @@ const UserActivePackComponent  = ({id}) => {
                     {activePacks.map(data => (
                         <tr>
                             <td>{data.id}</td>
-                            <td><b>15/20/2021</b></td>
+                            <td><b>{dateConverter(data.date_created)}</b></td>
 
                             <td>{data.buyer.name} <br/> <b>{data.buyer.email}</b><br/> {data.buyer.phone_number}</td>
                             <td>

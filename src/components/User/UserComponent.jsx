@@ -1,4 +1,4 @@
-import {Form, Row, Col, Alert, Spinner, Tab, Tabs} from 'react-bootstrap';
+import {Form, Row, Col, Pagination, Tab, Tabs} from 'react-bootstrap';
 import {
     Box,
     Container,
@@ -18,30 +18,89 @@ import {
     ModalOverlay, useDisclosure
 } from "@chakra-ui/react";
 import StatsPanel from './StatsPanel';
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import src from '../../assets/farm.jpg';
 import UserActivePackComponent from "../User/UserActivePackComponent";
 import UserPendingPackComponent from "../User/UserPendingPackComponent";
 import {FaBackspace, FaPhone, FaPhoneSquareAlt} from "react-icons/all";
-import {getAllUsers, getAllUsersBasic} from '../../apiServices/userServices';
+import {getAllUsers, searchUser} from '../../apiServices/userServices';
+import store from '../../store/store';
+import { useState } from '@hookstate/core';
 
 const UserComponent = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const [user, setUser] = useState([])
-    const [userDetail, setUserDetail] = useState({})
+    const [user, setUser] = React.useState([])
+    const [userDetail, setUserDetail] = React.useState({})
+    const [isSearch, setIsSearch] = React.useState(false)
+    const [keyword, setKeyword] = React.useState("")
+    const [reRenderToggle, setReRenderToggle] = React.useState(true)
+
+
+    const [page, setPage] = React.useState(1)
+    const [currentPage, setCurrentPage] = React.useState(0)
+    const [totalPages, setTotalPages] = React.useState(0)
+
+    const {alertNotification} = useState(store)
+    const {alertType} = useState(store)
+    const {alertMessage} = useState(store)
+
+    function goToNextPage() {
+        if(page < totalPages){
+            setPage(page + 1)
+        }
+     }
+   
+    function goToPreviousPage() {
+        if(page > 1){
+            setPage(page - 1)
+        }
+     }
 
     useEffect(() => {
         const fetch = async() => {
           try{
-            const res = await getAllUsers()
+            const res = await getAllUsers(page)
             setUser(res.data.data)
+            setTotalPages(res.data.meta.last_page)
+            setCurrentPage(res.data.meta.current_page)
           }
           catch(err){
             console.log(err)
           }
         }
         fetch()
-      }, [])
+      }, [page, reRenderToggle])
+
+    const onSearch = async() => {
+        try{
+            if(!isSearch){
+                if(keyword !== ""){
+                    const res = await searchUser(keyword)
+                    if(res.data.data.length > 0){
+                        setUser(res.data.data)
+                        setIsSearch(true)
+                    }
+                    else{
+                        alertMessage.set("User Not Found")
+                        alertType.set("success")
+                        alertNotification.set(true)
+                        setTimeout(() => {
+                        alertNotification.set(false)
+                        alertMessage.set("")
+                        alertType.set("")
+                        }, 1000);
+                    }
+                }
+            }
+            else{
+                setReRenderToggle(!reRenderToggle)
+                setIsSearch(false)
+            }
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
 
       const viewUserDetail = (detail) => {
         setUserDetail(detail)
@@ -59,17 +118,16 @@ const UserComponent = () => {
                         <Row className="w-100">
                             <Col className="my-2 col-md-6 col-lg-3 col-12">
                                 <input className="form-control form-control-sm" list="datalistOptions" id="exampleDataList"
-                                       placeholder="User Name.."/>
-                                    <datalist id="datalistOptions">
-                                        <option value="James"/>
-                                            <option value="Peace"/>
-
+                                       placeholder="User Name.." value={keyword} onChange={(e) => setKeyword(e.target.value)}/>
+                                    <datalist id="datalistOptions" >
+                                    {user.map(data => (
+                                        <option value={data.name} key={data.id}/>
+                                    ))}
                                     </datalist>
                             </Col>
 
-
                             <Col className="my-2">
-                                <button className="btn btn-add-outline">Apply</button>
+                                <button className="btn btn-add-outline" type="button" onClick={onSearch}>{isSearch ? "Cancel" : "Apply"}</button>
                             </Col>
                         </Row>
                     </Form>
@@ -92,7 +150,7 @@ const UserComponent = () => {
                     </thead>
                     {user.map((data, index) => (
                     <tbody>
-                    {data.roles.length === 0 ?<tbody></tbody>:
+                    {/* {data.roles.length === 0 ?<tbody></tbody>: */}
                     <tr key={data.id}>
 
                         <td><b>{index + 1}</b></td>
@@ -107,10 +165,18 @@ const UserComponent = () => {
                         </td>
                         <td><span onClick={() => viewUserDetail(data)} className="btn btn-dark btn-sm">View</span></td>
 
-                    </tr>}
+                    </tr>
                     </tbody>
                     ))}
                 </table>
+                {
+                !isSearch &&
+                <Pagination>
+                {page > 1 && <Pagination.Prev onClick={goToPreviousPage}/> }
+                    <Pagination.Item active>{currentPage}</Pagination.Item>
+                {page !== totalPages && <Pagination.Next onClick={goToNextPage}/> }
+                </Pagination>
+                }
             </div>
 
             <Modal isOpen={isOpen} onClose={onClose} size={"full"} >

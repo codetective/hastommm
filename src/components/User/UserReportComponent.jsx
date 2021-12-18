@@ -12,6 +12,7 @@ import { useState } from '@hookstate/core';
 import {Spinner, Alert} from 'react-bootstrap';
 import {generateReportForPack} from '../../apiServices/ReportServices';
 import {getCycle} from '../../apiServices/cycleServices';
+import { dateConverter } from '../../utils/Functions';
 
 
 const UserReportComponent  = ({packID, report}) => {
@@ -192,13 +193,13 @@ const UserReportComponent  = ({packID, report}) => {
                         <th>Activity</th>
                         <th>Media Link</th>
                         <th>Action</th>
-
-
+{console.log(report)}
                     </tr>
                     </thead>
                     <tbody>
+                    {report.length < 1 ?
                     <tr>
-                        <td><b>15/20/2021</b></td>
+                        <td><b>{dateConverter(report.created_at)}</b></td>
                         <td>{report.title}</td>
                         <td>{report.description}</td>
                         <td><a href={report.link}>Link</a></td>
@@ -206,6 +207,19 @@ const UserReportComponent  = ({packID, report}) => {
                             <FaTrashAlt/>
                         </td>
                     </tr>
+                    :
+                    report.map(data => (
+                        <tr>
+                            <td><b>{dateConverter(data.created_at)}</b></td>
+                            <td>{data.title}</td>
+                            <td>{data.description}</td>
+                            <td><a href={data.link}>Link</a></td>
+                            <td className="">
+                                <FaTrashAlt/>
+                            </td>
+                        </tr>
+                    ))
+                    }
                     </tbody>
                 </table>
             </div>

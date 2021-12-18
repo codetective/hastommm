@@ -8,7 +8,10 @@ export const generateReportForCycle = (data) => {
     return http.post("/admin/generate-report-for-cycle", data)
 }
 
-export const getAllReports = () => {
+export const getAllReports = (page) => {
+    if (page) {
+        return http.get(`/admin/report/list?page=${page}`)
+    }
     return http.get("/admin/report/list")
 }
 
