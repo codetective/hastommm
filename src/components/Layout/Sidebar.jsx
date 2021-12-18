@@ -98,11 +98,11 @@ const links3 = [
     link: 'Create Admin',
     icon: <FaToolbox />,
   },
-  {
-    path: '/settings',
-    link: 'settings',
-    icon: <FaTools />,
-  },
+  // {
+  //   path: '/settings',
+  //   link: 'settings',
+  //   icon: <FaTools />,
+  // },
 
 ];
 

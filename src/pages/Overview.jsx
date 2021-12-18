@@ -18,7 +18,7 @@ const Overview = () => {
   const [totalCycles, setTotalCycles] = useState(0)
   const [totalArticles, setTotalArticles] = useState(0)
   const [totalUsers, setTotalUsers] = useState(0)
-  const [totalPendingOrder, setTotalPendingOrder] = useState(0)
+  const [totalOrder, setTotalOrder] = useState(0)
   const [totalFarm, setTotalFarm] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -84,7 +84,7 @@ const Overview = () => {
     const fetch = async() => {
       try{
         const res = await getAllPacks()
-        setTotalPendingOrder(res.data.meta.total)
+        setTotalOrder(res.data.meta.total)
 
       }
       catch(err){
@@ -110,9 +110,9 @@ const Overview = () => {
           />
           <OverviewCard
               pageLink="/subscriptions"
-              title="Pending Orders"
+              title="Total Packs"
               icon={GiGroundSprout}
-              stat={totalPendingOrder}
+              stat={totalOrder}
           />
           <OverviewCard
               pageLink="/cycle"

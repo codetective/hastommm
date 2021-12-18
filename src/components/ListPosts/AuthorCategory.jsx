@@ -17,7 +17,7 @@ const AuthorCategory = props => {
         {props.category}
       </Text>
       <Text as="p" color="textDark.100" fontSize="15px">
-        By {props.author}
+        {/*By {props.author}*/}
       </Text>
     </Box>
   );

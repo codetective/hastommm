@@ -28,6 +28,7 @@ import { stateToHTML } from 'draft-js-export-html';
 import axios from 'axios';
 import baseURL from '../../helpers/config';
 import { FaTrash } from 'react-icons/fa';
+import {http} from "../../apiServices/httpService";
 function convertCommentFromJSONToHTML(text) {
   let blocks = JSON.parse(text);
   return stateToHTML(convertFromRaw(blocks));
@@ -46,7 +47,7 @@ function PostCard({ post }) {
     setDeleting(true);
     try {
       //eslint-disable-next-line
-      let dt = await axios.delete(baseURL + '/article/' + post.uuid);
+      let dt = await http.delete(baseURL + '/article/' + post.uuid);
       setDeleted(true);
       onClose();
       setDeleting(false);
@@ -81,7 +82,6 @@ function PostCard({ post }) {
       width={['100%', '100%', '100%', '100%']}
       bg="white"
       mx="auto"
-      rounded="20px"
       position="relative"
     >
       <Box
@@ -132,7 +132,7 @@ function PostCard({ post }) {
         <Flex justify="space-between" pr={6}>
           <AuthorCategory
             category={post.category ? post.category.category : 'EMPTY'}
-            author={post.author.name}
+            // author={post.author.name}
           />
         </Flex>
         <Box p={4}>
@@ -151,19 +151,19 @@ function PostCard({ post }) {
               {post.title}
             </Link>
           </Heading>
-          <Box
-            id="conntent-box"
-            color="textDark"
-            py={'15px'}
-            height="100px"
-            className="line-clamp"
-          >
-            <Box
-              dangerouslySetInnerHTML={{
-                __html: convertCommentFromJSONToHTML(post.content),
-              }}
-            />
-          </Box>
+          {/*<Box*/}
+          {/*  id="conntent-box"*/}
+          {/*  color="textDark"*/}
+          {/*  py={'15px'}*/}
+          {/*  height="100px"*/}
+          {/*  className="line-clamp"*/}
+          {/*>*/}
+          {/*  <Box*/}
+          {/*    dangerouslySetInnerHTML={{*/}
+          {/*      __html: convertCommentFromJSONToHTML(post.content),*/}
+          {/*    }}*/}
+          {/*  />*/}
+          {/*</Box>*/}
           <HStack justify="space-between" align="center" pt="10px">
             <Text as={'p'} color="textDark.100" className="qfont">
               <ReactTimeAgo date={post.create_at} />

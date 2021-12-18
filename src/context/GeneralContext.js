@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import baseURL from '../helpers/config';
+import { http } from '../apiServices/httpService';
+
 
 const GeneralContext = React.createContext();
 
@@ -61,7 +63,7 @@ const GeneralProvider = ({ children }) => {
     setCatError(null);
     try {
       //eslint-disable-next-line
-      const dt = await axios.post(baseURL + '/article-category/create', {
+      const dt = await http.post(baseURL + '/article-category/create', {
         category: name,
       });
       setCatError(null);

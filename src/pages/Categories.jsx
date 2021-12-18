@@ -27,6 +27,7 @@ import { useState } from 'react';
 import baseURL from '../helpers/config';
 import axios from 'axios';
 import { useEffect } from 'react';
+import {http} from "../apiServices/httpService";
 
 export default function Categories() {
   const toast = useToast();
@@ -53,7 +54,7 @@ export default function Categories() {
     setDeleting(true);
     try {
       //eslint-disable-next-line
-      let dt = await axios.delete(baseURL + '/article-category/' + cat.uuid);
+      let dt = await http.delete(baseURL + '/article-category/' + cat.uuid);
       setDeleting(false);
       onClose();
       FetchCategories();

@@ -21,6 +21,7 @@ const UserActivePackComponent  = ({id}) => {
     const [activePacks, setActivePacks] = useState([])
     const [currentUserPackReport, setCurrentUserPackReport] = useState({})
     const [packID, setPackID] = useState(0)
+    const [contentChanged, setContentChanged] = React.useState(0)
 
 
     useEffect(() => {
@@ -35,7 +36,7 @@ const UserActivePackComponent  = ({id}) => {
         catch(err){
             console.log(err)
         }
-    },[id])
+    },[id,contentChanged])
 
     const openModal = (data, id) => {
         setCurrentUserPackReport(data)
@@ -131,6 +132,7 @@ const UserActivePackComponent  = ({id}) => {
                             <UserReportComponent
                                 report = {currentUserPackReport}
                                 packID = {packID}
+                                contentChanged={contentChanged} setContentChanged={setContentChanged}
                             />
                         </div>
                     </ModalBody>

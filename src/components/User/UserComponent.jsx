@@ -173,8 +173,9 @@ const UserComponent = () => {
                 !isSearch &&
                 <Pagination>
                 {page > 1 && <Pagination.Prev onClick={goToPreviousPage}/> }
-                    <Pagination.Item active>{currentPage}</Pagination.Item>
+                    <Pagination.Item className={"active"}>{currentPage}</Pagination.Item>
                 {page !== totalPages && <Pagination.Next onClick={goToNextPage}/> }
+                    {page === totalPages && <Pagination.Item>Last page</Pagination.Item> }
                 </Pagination>
                 }
             </div>

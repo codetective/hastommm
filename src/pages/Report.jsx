@@ -161,14 +161,12 @@ export default function Cycle() {
                             report={generalReports} contentChanged={contentChanged} setContentChanged={setContentChanged}
                         />
                     </Tab>
-                    {/*<Tab eventKey="reports2" title="Targeted Reports">*/}
-                    {/*    <Report2Component />*/}
-                    {/*</Tab>*/}
                 </Tabs>
                 <Pagination>
                 {page > 1 && <Pagination.Prev onClick={goToPreviousPage}/> }
-                    <Pagination.Item active>{currentPage}</Pagination.Item>
+                    <Pagination.Item className={"active"}>{currentPage}</Pagination.Item>
                 {page !== totalPages && <Pagination.Next onClick={goToNextPage}/> }
+                    {page === totalPages && <Pagination.Item>Last page</Pagination.Item> }
                 </Pagination>
             </div>
 

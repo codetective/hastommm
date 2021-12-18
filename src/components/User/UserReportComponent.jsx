@@ -15,10 +15,11 @@ import {getCycle} from '../../apiServices/cycleServices';
 import { dateConverter } from '../../utils/Functions';
 
 
-const UserReportComponent  = ({packID, report}) => {
+const UserReportComponent  = ({packID, report,contentChanged, setContentChanged }) => {
     const {alertNotification} = useState(store)
     const {alertType} = useState(store)
     const {alertMessage} = useState(store)
+
 
     const initialValues = {
       title: "",
@@ -40,6 +41,7 @@ const UserReportComponent  = ({packID, report}) => {
             alertMessage.set("Report Generated")
             alertType.set("success")
             alertNotification.set(true)
+              setContentChanged(contentChanged + 1)
             setTimeout(() => {
               alertNotification.set(false)
               alertMessage.set("")
@@ -192,7 +194,6 @@ const UserReportComponent  = ({packID, report}) => {
                         <th>Report</th>
                         <th>Activity</th>
                         <th>Media Link</th>
-                        <th>Action</th>
 {console.log(report)}
                     </tr>
                     </thead>
@@ -214,9 +215,6 @@ const UserReportComponent  = ({packID, report}) => {
                             <td>{data.title}</td>
                             <td>{data.description}</td>
                             <td><a href={data.link}>Link</a></td>
-                            <td className="">
-                                <FaTrashAlt/>
-                            </td>
                         </tr>
                     ))
                     }
